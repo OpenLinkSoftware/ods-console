@@ -1,0 +1,209 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/i/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>ODS2</title>
+  <meta name="description" content="">
+
+  <!-- Mobile viewport optimized: h5bp.com/viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/bootstrap-responsive.css" rel="stylesheet">
+  <link type="text/css" href="css/custom-theme/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css">
+  
+  <!-- disabled the boilerplate css since it messes up bootstraps css here and there. 
+       TODO: figure out what we should keep from boilerplate   
+  <link rel="stylesheet" href="css/style.css">-->
+  
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+    
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build.
+       Modernizr enables HTML5 elements & feature detects for optimal performance.
+       Create your own custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="js/vendor/modernizr-2.5.3.min.js"></script>
+</head>
+<body>
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+
+
+  <!-- Navigation Templates
+       These are loaded into div "main-navigation" based on the logged in status in main.js. -->
+  <script id="loggedInNavTmpl" type="text/x-jsrender">
+            <ul class="nav pull-right">
+               <li><a href="#?page=register">Create new account</a></li>
+               <li class="dropdown">
+                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                       {{if photo}}
+                       <img class="gravatar rounded" alt="{{:name}}" src="{{:photo}}" />
+                       {{/if}}
+                       {{:name}} <b class="caret"></b>
+                       </a>
+                       <ul class="dropdown-menu">
+                           <li><a href="#?page=profile">View my profile</a></li>
+                           <li class="divider"></li>
+                           <li><a id="logout" href="#">Log out</a></li>
+                       </ul>
+                   </a>
+               </li>
+            </ul>
+  </script>
+
+  <script id="loggedOutNavTmpl" type="text/x-jsrender">
+  <ul class="nav pull-right">
+     <li><a href="#?page=register">Create new account</a></li>
+     <li>
+        <a id="login-dropdown" data-toggle="dropdown" class="dropdown-toggle" href="#">Sign in <i class="caret"></i></a>
+        <ul class="dropdown-menu" id="login-menu">
+           <li>
+              <form name="login" id="login" style="margin:0px 15px">
+                 <input type="text" name="usr" placeholder="Username" />
+                 <input type="password" name="pwd" placeholder="Password" />
+              </form>
+           </li>
+           <li><a href="#" id="loginButton">Login</a></li>
+           <li class="divider"></li>
+           <li><a href="#" id="loginWebId">Login with WebID</a></li>
+        </ul>
+     </li>
+  </ul>
+  </script>
+
+
+  <!-- Add your site or application content here -->
+  <header>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">ODS</a>
+          <div id="main-navigation" class="nav-collapse">
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="well">
+      <h3>Choose an API method</h3>
+      <form class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label" for="method"></label>
+          <div class="controls">
+            <select id="apiMethodSelector"><option name="none">Please
+                select a method</option></select>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="well">
+      <h3>Authentication</h3>
+      <form name="pwdHashAuthForm" class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label" for="usr">Username:</label>
+          <div class="controls">
+            <input type="text" id="usr" name="usr"/>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="pwd">Password:</label>
+          <div class="controls">
+            <input type="password" id="pwd" name="pwd" />
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+    <!-- initially hidden parameters div -->
+    <div id="apiParamsDiv" class="well" style="display: none">
+      <h3>Parameters</h3>
+      <form id="paramsForm" class="form-horizontal">
+        <div id="params"></div>
+        <div class="form-actions">
+          <input class="btn btn-primary" id="executeButton"
+            type="submit" value="Submit" />
+        </div>
+      </form>
+    </div>
+
+    <!-- initially hidden result div -->
+    <div id="resultDiv" class="well" style="display: none">
+      <h3>Result</h3>
+      <pre class="prettyprint" style="background-color:white" id="result"></pre>
+    </div>
+
+  <footer>
+     <div class="container footer"><span class="copyright">Copyright (C) 2012 OpenLink Software</span></div>
+  </footer>
+
+  <!-- JavaScript at the bottom for fast page loading: http://developer.yahoo.com/performance/rules.html#js_bottom -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.7.2.min.js"><\/script>')</script>
+  <script src="js/vendor/jquery.cookie.js"></script>
+  <script src="js/vendor/jquery.sha1.js"></script>
+  <script src="js/vendor/jquery-ui-1.8.19.custom.min.js"></script>
+  <script src="js/vendor/jquery-ui-messageBox.js"></script>
+  <script src="js/vendor/jquery.spinner.js"></script>
+  <script src="js/vendor/jquery.address-1.4.js"></script>
+
+  <script src="js/vendor/jsrender.js"></script>
+
+  <!--daterangepicker-->
+  <script type="text/javascript" src="js/third-party/jQuery-UI-Date-Range-Picker/js/date.js"></script>
+  <script type="text/javascript" src="js/third-party/jQuery-UI-Date-Range-Picker/js/daterangepicker.jQuery.js"></script>
+
+  <!--wijmo-->
+  <script src="js/third-party/wijmo/jquery.mousewheel.min.js" type="text/javascript"></script>
+  <script src="js/third-party/wijmo/jquery.bgiframe-2.1.3-pre.js" type="text/javascript"></script>
+  <script src="js/third-party/wijmo/jquery.wijmo-open.1.5.0.min.js" type="text/javascript"></script>
+
+  <!-- FileInput -->
+  <script src="js/third-party/jQuery-UI-FileInput/js/enhance.min.js" type="text/javascript"></script>
+  <script src="js/third-party/jQuery-UI-FileInput/js/fileinput.jquery.js" type="text/javascript"></script>
+
+  <script src="js/vendor/bootstrap.js"></script>
+
+  <!-- scripts concatenated and minified via build script -->
+  <script src="js/ods-common.js"></script>
+  <script src="js/main.js"></script>
+  <!-- end scripts -->
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <!--<script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>-->
+</body>
+</html>

@@ -1,0 +1,1058 @@
+{
+"wiki.topic.new": {
+"name": "wiki.topic.new", "param": ["cluster","name","content"]
+},
+"wiki.topic.get": {
+"name": "wiki.topic.get", "param": ["cluster","name"]
+},
+"wiki.topic.versions": {
+"name": "wiki.topic.versions", "param": ["cluster","name"]
+},
+"wiki.topic.versions.get": {
+"name": "wiki.topic.versions.get", "param": ["cluster","name","version"]
+},
+"wiki.topic.versions.diff": {
+"name": "wiki.topic.versions.diff", "param": ["cluster","name","version"]
+},
+"wiki.topic.edit": {
+"name": "wiki.topic.edit", "param": ["cluster","name","content"]
+},
+"wiki.topic.delete": {
+"name": "wiki.topic.delete", "param": ["cluster","name"]
+},
+"wiki.topic.sync": {
+"name": "wiki.topic.sync", "param": ["cluster","name"]
+},
+"wiki.upstream.new": {
+"name": "wiki.upstream.new", "param": ["cluster","name","url","user","password"]
+},
+"wiki.upstream.edit": {
+"name": "wiki.upstream.edit", "param": ["cluster","name","url","user","password"]
+},
+"wiki.upstream.delete": {
+"name": "wiki.upstream.delete", "param": ["cluster","name"]
+},
+"wiki.upstream.sync": {
+"name": "wiki.upstream.sync", "param": ["cluster","name"]
+},
+"wiki.comment.get": {
+"name": "wiki.comment.get", "param": ["comment_id"]
+},
+"wiki.comment.new": {
+"name": "wiki.comment.new", "param": ["cluster","topic","parent_id","title","text","name","email","url"]
+},
+"wiki.comment.delete": {
+"name": "wiki.comment.delete", "param": ["comment_id"]
+},
+"wiki.options.set": {
+"name": "wiki.options.set", "param": ["cluster","name","value"]
+},
+"wiki.options.get": {
+"name": "wiki.options.get", "param": ["cluster","name"]
+},
+"discussion.groups.get": {
+"name": "discussion.groups.get", "param": []
+},
+"discussion.group.get": {
+"name": "discussion.group.get", "param": ["group_id"]
+},
+"discussion.group.new": {
+"name": "discussion.group.new", "param": ["name","description"]
+},
+"discussion.group.remove": {
+"name": "discussion.group.remove", "param": ["group_id"]
+},
+"discussion.feed.new": {
+"name": "discussion.feed.new", "param": ["group_id","name"]
+},
+"discussion.feed.remove": {
+"name": "discussion.feed.remove", "param": ["feed_id"]
+},
+"discussion.message.new": {
+"name": "discussion.message.new", "param": ["group_id","subject","body"]
+},
+"discussion.message.get": {
+"name": "discussion.message.get", "param": ["message_id"]
+},
+"discussion.comment.new": {
+"name": "discussion.comment.new", "param": ["parent_id","subject","body"]
+},
+"discussion.comment.get": {
+"name": "discussion.comment.get", "param": ["comment_id"]
+},
+"weblog.post.new": {
+"name": "weblog.post.new", "param": ["inst_id","categories","date_created","description","enclosure","source","title","link","author","comments","allow_comments","allow_pings","convert_breaks","excerpt","tb_ping_urls","text_more","keywords","publish"]
+},
+"weblog.post.edit": {
+"name": "weblog.post.edit", "param": ["post_id","categories","date_created","description","enclosure","source","title","link","author","comments","allow_comments","allow_pings","convert_breaks","excerpt","tb_ping_urls","text_more","keywords","publish"]
+},
+"weblog.post.delete": {
+"name": "weblog.post.delete", "param": ["post_id"]
+},
+"weblog.post.get": {
+"name": "weblog.post.get", "param": ["post_id"]
+},
+"weblog.comment.get": {
+"name": "weblog.comment.get", "param": ["post_id","comment_id"]
+},
+"weblog.comment.approve": {
+"name": "weblog.comment.approve", "param": ["post_id","comment_id","flag"]
+},
+"weblog.comment.delete": {
+"name": "weblog.comment.delete", "param": ["post_id","comment_id"]
+},
+"weblog.comment.new": {
+"name": "weblog.comment.new", "param": ["post_id","name","title","email","url","text"]
+},
+"weblog.get": {
+"name": "weblog.get", "param": ["inst_id"]
+},
+"weblog.options.set": {
+"name": "weblog.options.set", "param": ["inst_id","options"]
+},
+"weblog.options.get": {
+"name": "weblog.options.get", "param": ["inst_id"]
+},
+"weblog.upstreaming.set": {
+"name": "weblog.upstreaming.set", "param": ["inst_id","target_rpc_url","target_blog_id","target_protocol_id","target_uname","target_password","acl_allow","acl_deny","sync_interval","keep_remote","max_retries","max_retransmits","initialize_log"]
+},
+"weblog.upstreaming.get": {
+"name": "weblog.upstreaming.get", "param": ["job_id"]
+},
+"weblog.upstreaming.remove": {
+"name": "weblog.upstreaming.remove", "param": ["job_id"]
+},
+"weblog.tagging.set": {
+"name": "weblog.tagging.set", "param": ["inst_id","flag"]
+},
+"weblog.tagging.retag": {
+"name": "weblog.tagging.retag", "param": ["inst_id","keep_existing_tags"]
+},
+"calendar.get": {
+"name": "calendar.get", "param": ["event_id"]
+},
+"calendar.event.new": {
+"name": "calendar.event.new", "param": ["inst_id","uid","subject","description","location","attendees","privacy","tags","event","eventStart","eventEnd","eRepeat","eRepeatParam1","eRepeatParam2","eRepeatParam3","eRepeatUntil","eReminder","notes"]
+},
+"calendar.event.edit": {
+"name": "calendar.event.edit", "param": ["event_id","uid","subject","description","location","attendees","privacy","tags","event","eventStart","eventEnd","eRepeat","eRepeatParam1","eRepeatParam2","eRepeatParam3","eRepeatUntil","eReminder","notes"]
+},
+"calendar.task.new": {
+"name": "calendar.task.new", "param": ["inst_id","uid","subject","description","attendees","privacy","tags","eventStart","eventEnd","priority","status","complete","completed","notes"]
+},
+"calendar.task.edit": {
+"name": "calendar.task.edit", "param": ["event_id","uid","subject","description","attendees","privacy","tags","eventStart","eventEnd","priority","status","complete","completed","notes"]
+},
+"calendar.delete": {
+"name": "calendar.delete", "param": ["event_id"]
+},
+"calendar.import": {
+"name": "calendar.import", "param": ["inst_id","source","sourceType","userName","userPassword","events","tasks","tags"]
+},
+"calendar.export": {
+"name": "calendar.export", "param": ["inst_id","events","tasks","periodFrom","periodTo","tagsInclude","tagsExclude"]
+},
+"calendar.comment.get": {
+"name": "calendar.comment.get", "param": ["comment_id"]
+},
+"calendar.comment.new": {
+"name": "calendar.comment.new", "param": ["event_id","parent_id","title","text","name","email","url"]
+},
+"calendar.comment.delete": {
+"name": "calendar.comment.delete", "param": ["comment_id"]
+},
+"calendar.annotation.get": {
+"name": "calendar.annotation.get", "param": ["annotation_id"]
+},
+"calendar.annotation.new": {
+"name": "calendar.annotation.new", "param": ["event_id","author","body"]
+},
+"calendar.annotation.claim": {
+"name": "calendar.annotation.claim", "param": ["annotation_id","claimIri","claimRelation","claimValue"]
+},
+"calendar.annotation.delete": {
+"name": "calendar.annotation.delete", "param": ["annotation_id"]
+},
+"calendar.publication.new": {
+"name": "calendar.publication.new", "param": ["inst_id","name","updateType","updatePeriod","updateFreq","destinationType","destination","userName","userPassword","events","tasks"]
+},
+"calendar.publication.get": {
+"name": "calendar.publication.get", "param": ["publication_id"]
+},
+"calendar.publication.edit": {
+"name": "calendar.publication.edit", "param": ["publication_id","name","updateType","updatePeriod","updateFreq","destinationType","destination","userName","userPassword","events","tasks"]
+},
+"calendar.publication.sync": {
+"name": "calendar.publication.sync", "param": ["publication_id"]
+},
+"calendar.publication.delete": {
+"name": "calendar.publication.delete", "param": ["publication_id"]
+},
+"calendar.subscription.new": {
+"name": "calendar.subscription.new", "param": ["inst_id","name","updateType","updatePeriod","updateFreq","sourceType","source","userName","userPassword","events","tasks"]
+},
+"calendar.subscription.get": {
+"name": "calendar.subscription.get", "param": ["subscription_id"]
+},
+"calendar.subscription.edit": {
+"name": "calendar.subscription.edit", "param": ["subscription_id","name","updateType","updatePeriod","updateFreq","sourceType","source","userName","userPassword","events","tasks"]
+},
+"calendar.subscription.sync": {
+"name": "calendar.subscription.sync", "param": ["subscription_id"]
+},
+"calendar.subscription.delete": {
+"name": "calendar.subscription.delete", "param": ["subscription_id"]
+},
+"calendar.upstream.new": {
+"name": "calendar.upstream.new", "param": ["inst_id","name","source","userName","userPassword","tagsInclude","tagsExclude"]
+},
+"calendar.upstream.edit": {
+"name": "calendar.upstream.edit", "param": ["upstream_id","name","source","userName","userPassword","tagsInclude","tagsExclude"]
+},
+"calendar.upstream.delete": {
+"name": "calendar.upstream.delete", "param": ["upstream_id"]
+},
+"calendar.options.set": {
+"name": "calendar.options.set", "param": ["inst_id","options"]
+},
+"calendar.options.get": {
+"name": "calendar.options.get", "param": ["inst_id"]
+},
+"photo.album.new": {
+"name": "photo.album.new", "param": ["inst_id","name","description","startDate","endDate","visibility","geoLocation"]
+},
+"photo.album.edit": {
+"name": "photo.album.edit", "param": ["inst_id","name","new_name","description","startDate","endDate","visibility","geolocation","obsolete"]
+},
+"photo.album.delete": {
+"name": "photo.album.delete", "param": ["inst_id","name"]
+},
+"photo.image.get": {
+"name": "photo.image.get", "param": ["inst_id","album","name","outputFormat"]
+},
+"photo.image.new": {
+"name": "photo.image.new", "param": ["inst_id","album","name","description","visibility"]
+},
+"photo.image.newUrl": {
+"name": "photo.image.newUrl", "param": ["inst_id","album","name","description","visibility","sourceUrl"]
+},
+"photo.image.edit": {
+"name": "photo.image.edit", "param": ["inst_id","album","name","new_name","description","visibility"]
+},
+"photo.image.delete": {
+"name": "photo.image.delete", "param": ["inst_id","album","name"]
+},
+"photo.comment.get": {
+"name": "photo.comment.get", "param": ["comment_id"]
+},
+"photo.comment.new": {
+"name": "photo.comment.new", "param": ["inst_id","album","image","text"]
+},
+"photo.comment.delete": {
+"name": "photo.comment.delete", "param": ["comment_id"]
+},
+"photo.options.set": {
+"name": "photo.options.set", "param": ["inst_id","show_map","show_timeline","discussion_enable","discussion_init","albums_per_page"]
+},
+"photo.options.get": {
+"name": "photo.options.get", "param": ["inst_id"]
+},
+"photo.album.new": {
+"name": "photo.album.new", "param": ["inst_id","name","description","startDate","endDate","visibility","geoLocation"]
+},
+"photo.album.edit": {
+"name": "photo.album.edit", "param": ["inst_id","name","new_name","description","startDate","endDate","visibility","geolocation","obsolete"]
+},
+"photo.album.delete": {
+"name": "photo.album.delete", "param": ["inst_id","name"]
+},
+"photo.image.get": {
+"name": "photo.image.get", "param": ["inst_id","album","name","outputFormat"]
+},
+"photo.image.new": {
+"name": "photo.image.new", "param": ["inst_id","album","name","description","visibility"]
+},
+"photo.image.newUrl": {
+"name": "photo.image.newUrl", "param": ["inst_id","album","name","description","visibility","sourceUrl"]
+},
+"photo.image.edit": {
+"name": "photo.image.edit", "param": ["inst_id","album","name","new_name","description","visibility"]
+},
+"photo.image.delete": {
+"name": "photo.image.delete", "param": ["inst_id","album","name"]
+},
+"photo.comment.get": {
+"name": "photo.comment.get", "param": ["comment_id"]
+},
+"photo.comment.new": {
+"name": "photo.comment.new", "param": ["inst_id","album","image","text"]
+},
+"photo.comment.delete": {
+"name": "photo.comment.delete", "param": ["comment_id"]
+},
+"photo.options.set": {
+"name": "photo.options.set", "param": ["inst_id","show_map","show_timeline","discussion_enable","discussion_init","albums_per_page"]
+},
+"photo.options.get": {
+"name": "photo.options.get", "param": ["inst_id"]
+},
+"briefcase.list": {
+"name": "briefcase.list", "param": ["path"]
+},
+"briefcase.resource.info": {
+"name": "briefcase.resource.info", "param": ["path"]
+},
+"briefcase.resource.vc.set": {
+"name": "briefcase.resource.vc.set", "param": ["path","state"]
+},
+"briefcase.resource.vc.get": {
+"name": "briefcase.resource.vc.get", "param": ["path","version"]
+},
+"briefcase.resource.vc.checkin": {
+"name": "briefcase.resource.vc.checkin", "param": ["path"]
+},
+"briefcase.resource.vc.checkout": {
+"name": "briefcase.resource.vc.checkout", "param": ["path"]
+},
+"briefcase.resource.vc.lock": {
+"name": "briefcase.resource.vc.lock", "param": ["path","state"]
+},
+"briefcase.resource.vc.info": {
+"name": "briefcase.resource.vc.info", "param": ["path"]
+},
+"briefcase.resource.vc.versions": {
+"name": "briefcase.resource.vc.versions", "param": ["path"]
+},
+"briefcase.resource.get": {
+"name": "briefcase.resource.get", "param": ["path"]
+},
+"briefcase.resource.store": {
+"name": "briefcase.resource.store", "param": ["path","content","type","permissions"]
+},
+"briefcase.resource.delete": {
+"name": "briefcase.resource.delete", "param": ["path"]
+},
+"briefcase.collection.info": {
+"name": "briefcase.collection.info", "param": ["path"]
+},
+"briefcase.collection.create": {
+"name": "briefcase.collection.create", "param": ["path","permissions"]
+},
+"briefcase.collection.delete": {
+"name": "briefcase.collection.delete", "param": ["path"]
+},
+"briefcase.copy": {
+"name": "briefcase.copy", "param": ["from_path","to_path","overwrite","permissions"]
+},
+"briefcase.move": {
+"name": "briefcase.move", "param": ["from_path","to_path","overwrite"]
+},
+"briefcase.property.list": {
+"name": "briefcase.property.list", "param": ["path","mask"]
+},
+"briefcase.property.set": {
+"name": "briefcase.property.set", "param": ["path","name","value"]
+},
+"briefcase.property.remove": {
+"name": "briefcase.property.remove", "param": ["path","name"]
+},
+"briefcase.property.get": {
+"name": "briefcase.property.get", "param": ["path","name"]
+},
+"briefcase.share.add": {
+"name": "briefcase.share.add", "param": ["path","user","inheritance","allow","deny"]
+},
+"briefcase.share.remove": {
+"name": "briefcase.share.remove", "param": ["path","user","inheritance"]
+},
+"briefcase.share.list": {
+"name": "briefcase.share.list", "param": ["path"]
+},
+"briefcase.options.set": {
+"name": "briefcase.options.set", "param": ["inst_id","options"]
+},
+"briefcase.options.get": {
+"name": "briefcase.options.get", "param": ["inst_id"]
+},
+"addressbook.search": {
+"name": "addressbook.search", "param": ["inst_id","keywords","category","tags","maxResults"]
+},
+"addressbook.get": {
+"name": "addressbook.get", "param": ["contact_id"]
+},
+"addressbook.new": {
+"name": "addressbook.new", "param": ["inst_id","name","category_id","kind","title","fName","mName","lName","fullName","gender","birthday","iri","foaf","photo","interests","relationships","mail","web","icq","skype","aim","yahoo","msn","hCountry","hState","hCity","hCode","hAddress1","hAddress2","hTzone","hLat","hLng","hPhone","hMobile","hFax","hMail","hWeb","bCountry","bState","bCity","bCode","bAddress1","bAddress2","bTzone","bLat","bLng","bPhone","bMobile","bFax","bIndustry","bOrganization","bDepartment","bJob","bMail","bWeb","tags"]
+},
+"addressbook.edit": {
+"name": "addressbook.edit", "param": ["contact_id","name","category_id","kind","title","fName","mName","lName","fullName","gender","birthday","iri","foaf","photo","interests","relationships","mail","web","icq","skype","aim","yahoo","msn","hCountry","hState","hCity","hCode","hAddress1","hAddress2","hTzone","hLat","hLng","hPhone","hMobile","hFax","hMail","hWeb","bCountry","bState","bCity","bCode","bAddress1","bAddress2","bTzone","bLat","bLng","bPhone","bMobile","bFax","bIndustry","bOrganization","bDepartment","bJob","bMail","bWeb","tags"]
+},
+"addressbook.delete": {
+"name": "addressbook.delete", "param": ["contact_id"]
+},
+"addressbook.relationship.new": {
+"name": "addressbook.relationship.new", "param": ["contact","relationship"]
+},
+"addressbook.relationship.delete": {
+"name": "addressbook.relationship.delete", "param": ["contact","relationship"]
+},
+"addressbook.import": {
+"name": "addressbook.import", "param": ["inst_id","source","sourceType","contentType","tags"]
+},
+"addressbook.export": {
+"name": "addressbook.export", "param": ["inst_id","contentType"]
+},
+"addressbook.annotation.get": {
+"name": "addressbook.annotation.get", "param": ["annotation_id"]
+},
+"addressbook.annotation.new": {
+"name": "addressbook.annotation.new", "param": ["contact_id","author","body"]
+},
+"addressbook.annotation.claim": {
+"name": "addressbook.annotation.claim", "param": ["annotation_id","claimRelation","claimValue"]
+},
+"addressbook.annotation.delete": {
+"name": "addressbook.annotation.delete", "param": ["annotation_id"]
+},
+"addressbook.comment.get": {
+"name": "addressbook.comment.get", "param": ["comment_id"]
+},
+"addressbook.comment.new": {
+"name": "addressbook.comment.new", "param": ["contact_id","parent_id","title","text","name","email","url"]
+},
+"addressbook.comment.delete": {
+"name": "addressbook.comment.delete", "param": ["comment_id"]
+},
+"addressbook.publication.new": {
+"name": "addressbook.publication.new", "param": ["inst_id","name","updateType","updatePeriod","updateFreq","destinationType","destination","userName","userPassword","tagsInclude","tagsExclude"]
+},
+"addressbook.publication.get": {
+"name": "addressbook.publication.get", "param": ["publication_id"]
+},
+"addressbook.publication.edit": {
+"name": "addressbook.publication.edit", "param": ["publication_id","name","updateType","updatePeriod","updateFreq","destinationType","destination","userName","userPassword","tagsInclude","tagsExclude"]
+},
+"addressbook.publication.sync": {
+"name": "addressbook.publication.sync", "param": ["publication_id"]
+},
+"addressbook.publication.delete": {
+"name": "addressbook.publication.delete", "param": ["publication_id"]
+},
+"addressbook.subscription.new": {
+"name": "addressbook.subscription.new", "param": ["inst_id","name","updateType","updatePeriod","updateFreq","sourceType","source","userName","userPassword","tagsInclude","tagsExclude"]
+},
+"addressbook.subscription.get": {
+"name": "addressbook.subscription.get", "param": ["subscription_id"]
+},
+"addressbook.subscription.edit": {
+"name": "addressbook.subscription.edit", "param": ["subscription_id","name","updateType","updatePeriod","updateFreq","sourceType","source","userName","userPassword","tagsInclude","tagsExclude"]
+},
+"addressbook.subscription.sync": {
+"name": "addressbook.subscription.sync", "param": ["subscription_id"]
+},
+"addressbook.subscription.delete": {
+"name": "addressbook.subscription.delete", "param": ["subscription_id"]
+},
+"addressbook.options.set": {
+"name": "addressbook.options.set", "param": ["inst_id","options"]
+},
+"addressbook.options.get": {
+"name": "addressbook.options.get", "param": ["inst_id"]
+},
+"qrcode": {
+"name": "qrcode", "param": ["data","width","height","scale"]
+},
+"iri2proxy": {
+"name": "iri2proxy", "param": ["iri"]
+},
+"ontology.classes": {
+"name": "ontology.classes", "param": ["ontology","prefix","dependentOntology"]
+},
+"ontology.classProperties": {
+"name": "ontology.classProperties", "param": ["ontology","prefix","ontologyClass"]
+},
+"ontology.objects": {
+"name": "ontology.objects", "param": ["ontology","prefix"]
+},
+"objects.rdf": {
+"name": "objects.rdf", "param": ["items","format"]
+},
+"lookup.list": {
+"name": "lookup.list", "param": ["key","param","depend"]
+},
+"getDefaultHttps": {
+"name": "getDefaultHttps", "param": []
+},
+"server.getInfo": {
+"name": "server.getInfo", "param": ["info"]
+},
+"address.geoData": {
+"name": "address.geoData", "param": ["address1","address2","city","state","code","country"]
+},
+"user.checkAvailability": {
+"name": "user.checkAvailability", "param": ["name","email"]
+},
+"user.checkAvalability": {
+"name": "user.checkAvalability", "param": ["name","email"]
+},
+"user.register": {
+"name": "user.register", "param": ["name","password","email","mode","data"]
+},
+"twitterServer": {
+"name": "twitterServer", "param": ["hostUrl"]
+},
+"twitterVerify": {
+"name": "twitterVerify", "param": ["sid","oauth_verifier","oauth_token"]
+},
+"linkedinServer": {
+"name": "linkedinServer", "param": ["hostUrl"]
+},
+"linkedinVerify": {
+"name": "linkedinVerify", "param": ["sid","oauth_verifier","oauth_token"]
+},
+"user.authenticate": {
+"name": "user.authenticate", "param": ["user_name","password_hash","facebookUID","openIdUrl","openIdIdentity","oauthMode","oauthSid","oauthVerifier","oauthToken"]
+},
+"user.login": {
+"name": "user.login", "param": ["user_name","password_hash"]
+},
+"user.validate": {
+"name": "user.validate", "param": []
+},
+"user.logout": {
+"name": "user.logout", "param": []
+},
+"user.update": {
+"name": "user.update", "param": ["user_info"]
+},
+"user.update.fields": {
+"name": "user.update.fields", "param": ["nickName","mail","title","firstName","lastName","fullName","gender","birthday","homepage","mailSignature","summary","appSetting","spbEnable","inSearch","showActive","webIDs","interests","topicInterests","icq","skype","yahoo","aim","msn","messaging","defaultMapLocation","homeCountry","homeState","homeCity","homeCode","homeAddress1","homeAddress2","homeTimezone","homeLatitude","homeLongitude","homePhone","homePhoneExt","homeMobile","businessIndustry","businessOrganization","businessHomePage","businessJob","businessRegNo","businessCareer","businessEmployees","businessVendor","businessService","businessOther","businessNetwork","businessResume","businessCountry","businessState","businessCity","businessCode","businessAddress1","businessAddress2","businessTimezone","businessLatitude","businessLongitude","businessPhone","businessPhoneExt","businessMobile","businessIcq","businessSkype","businessYahoo","businessAim","businessMsn","businessMessaging","securityOpenID","securityFacebookID","securitySecretQuestion","securitySecretAnswer","securitySiocLimit","photo","photoContent","audio","audioContent","mode","onlineAccounts"]
+},
+"user.acl.info": {
+"name": "user.acl.info", "param": []
+},
+"user.acl.update": {
+"name": "user.acl.update", "param": ["acls"]
+},
+"user.password_change": {
+"name": "user.password_change", "param": ["old_password","new_password"]
+},
+"user.upload": {
+"name": "user.upload", "param": []
+},
+"user.delete": {
+"name": "user.delete", "param": ["name"]
+},
+"user.enable": {
+"name": "user.enable", "param": ["name"]
+},
+"user.disable": {
+"name": "user.disable", "param": ["name"]
+},
+"user.get": {
+"name": "user.get", "param": ["name"]
+},
+"user.info": {
+"name": "user.info", "param": ["name","short"]
+},
+"user.info.webID": {
+"name": "user.info.webID", "param": ["webID","output"]
+},
+"user.certificateUrl": {
+"name": "user.certificateUrl", "param": []
+},
+"user.search": {
+"name": "user.search", "param": ["pattern"]
+},
+"user.invitation.new": {
+"name": "user.invitation.new", "param": ["friends_email","custom_message"]
+},
+"user.invite": {
+"name": "user.invite", "param": ["friends_email","custom_message"]
+},
+"user.invitation.approve": {
+"name": "user.invitation.approve", "param": ["invitation_id","approve"]
+},
+"user.invitation": {
+"name": "user.invitation", "param": ["invitation_id","approve"]
+},
+"user.invitation.list": {
+"name": "user.invitation.list", "param": []
+},
+"user.invitations.get": {
+"name": "user.invitations.get", "param": []
+},
+"user.relation.delete": {
+"name": "user.relation.delete", "param": ["friend"]
+},
+"user.relation_terminate": {
+"name": "user.relation_terminate", "param": ["friend"]
+},
+"user.tagging_rules.add": {
+"name": "user.tagging_rules.add", "param": ["rulelist_name","rules","is_public"]
+},
+"user.tagging_rules.delete": {
+"name": "user.tagging_rules.delete", "param": ["rulelist_name"]
+},
+"user.tagging_rules.update": {
+"name": "user.tagging_rules.update", "param": ["rulelist_name","rules"]
+},
+"user.hyperlinking_rules.add": {
+"name": "user.hyperlinking_rules.add", "param": ["rules"]
+},
+"user.hyperlinking_rules.update": {
+"name": "user.hyperlinking_rules.update", "param": ["rules"]
+},
+"user.hyperlinking_rules.delete": {
+"name": "user.hyperlinking_rules.delete", "param": ["rules"]
+},
+"user.topicOfInterest.new": {
+"name": "user.topicOfInterest.new", "param": ["topicURI","topicLabel"]
+},
+"user.topicOfInterest.delete": {
+"name": "user.topicOfInterest.delete", "param": ["topicURI"]
+},
+"user.thingOfInterest.new": {
+"name": "user.thingOfInterest.new", "param": ["thingURI","thingLabel"]
+},
+"user.thingOfInterest.delete": {
+"name": "user.thingOfInterest.delete", "param": ["thingURI"]
+},
+"user.annotation.new": {
+"name": "user.annotation.new", "param": ["claimIri","claimRelation","claimValue"]
+},
+"user.annotation.delete": {
+"name": "user.annotation.delete", "param": ["claimIri","claimRelation","claimValue"]
+},
+"user.onlineAccounts.uri": {
+"name": "user.onlineAccounts.uri", "param": ["url"]
+},
+"user.onlineAccounts.list": {
+"name": "user.onlineAccounts.list", "param": ["type"]
+},
+"user.onlineAccounts.new": {
+"name": "user.onlineAccounts.new", "param": ["name","url","uri","type"]
+},
+"user.onlineAccounts.delete": {
+"name": "user.onlineAccounts.delete", "param": ["id","name","url","uri","type"]
+},
+"user.bioEvents.list": {
+"name": "user.bioEvents.list", "param": []
+},
+"user.bioEvents.new": {
+"name": "user.bioEvents.new", "param": ["event","date","place"]
+},
+"user.bioEvents.delete": {
+"name": "user.bioEvents.delete", "param": ["id","event","date","place"]
+},
+"user.favorites.list": {
+"name": "user.favorites.list", "param": []
+},
+"user.favorites.get": {
+"name": "user.favorites.get", "param": ["id"]
+},
+"user.favorites.new": {
+"name": "user.favorites.new", "param": ["flag","label","uri","properties"]
+},
+"user.favorites.edit": {
+"name": "user.favorites.edit", "param": ["id","flag","label","uri","properties"]
+},
+"user.favorites.delete": {
+"name": "user.favorites.delete", "param": ["id"]
+},
+"user.mades.list": {
+"name": "user.mades.list", "param": []
+},
+"user.mades.get": {
+"name": "user.mades.get", "param": ["id"]
+},
+"user.mades.new": {
+"name": "user.mades.new", "param": ["property","url","description"]
+},
+"user.mades.edit": {
+"name": "user.mades.edit", "param": ["id","property","url","description"]
+},
+"user.mades.delete": {
+"name": "user.mades.delete", "param": ["id"]
+},
+"user.offers.list": {
+"name": "user.offers.list", "param": ["type"]
+},
+"user.offers.get": {
+"name": "user.offers.get", "param": ["id"]
+},
+"user.offers.new": {
+"name": "user.offers.new", "param": ["type","flag","name","comment","properties"]
+},
+"user.offers.edit": {
+"name": "user.offers.edit", "param": ["id","type","flag","name","comment","properties"]
+},
+"user.offers.delete": {
+"name": "user.offers.delete", "param": ["id"]
+},
+"user.seeks.list": {
+"name": "user.seeks.list", "param": []
+},
+"user.seeks.get": {
+"name": "user.seeks.get", "param": ["id"]
+},
+"user.seeks.new": {
+"name": "user.seeks.new", "param": ["type","flag","name","comment","properties"]
+},
+"user.seeks.edit": {
+"name": "user.seeks.edit", "param": ["id","type","flag","name","comment","properties"]
+},
+"user.seeks.delete": {
+"name": "user.seeks.delete", "param": ["id"]
+},
+"user.owns.list": {
+"name": "user.owns.list", "param": ["type"]
+},
+"user.owns.get": {
+"name": "user.owns.get", "param": ["id"]
+},
+"user.owns.new": {
+"name": "user.owns.new", "param": ["type","flag","name","comment","properties"]
+},
+"user.owns.edit": {
+"name": "user.owns.edit", "param": ["id","type","flag","name","comment","properties"]
+},
+"user.owns.delete": {
+"name": "user.owns.delete", "param": ["id"]
+},
+"user.likes.list": {
+"name": "user.likes.list", "param": []
+},
+"user.likes.get": {
+"name": "user.likes.get", "param": ["id"]
+},
+"user.likes.new": {
+"name": "user.likes.new", "param": ["flag","uri","type","name","comment","properties"]
+},
+"user.likes.edit": {
+"name": "user.likes.edit", "param": ["id","flag","uri","type","name","comment","properties"]
+},
+"user.likes.delete": {
+"name": "user.likes.delete", "param": ["id"]
+},
+"user.knows.list": {
+"name": "user.knows.list", "param": []
+},
+"user.knows.get": {
+"name": "user.knows.get", "param": ["id"]
+},
+"user.knows.new": {
+"name": "user.knows.new", "param": ["flag","uri","label"]
+},
+"user.knows.edit": {
+"name": "user.knows.edit", "param": ["id","flag","uri","label"]
+},
+"user.knows.delete": {
+"name": "user.knows.delete", "param": ["id"]
+},
+"user.certificates.list": {
+"name": "user.certificates.list", "param": []
+},
+"user.certificates.get": {
+"name": "user.certificates.get", "param": ["id"]
+},
+"user.certificates.new": {
+"name": "user.certificates.new", "param": ["certificate","enableLogin"]
+},
+"user.certificates.edit": {
+"name": "user.certificates.edit", "param": ["id","certificate","enableLogin"]
+},
+"user.certificates.delete": {
+"name": "user.certificates.delete", "param": ["id"]
+},
+"user.getFOAFData": {
+"name": "user.getFOAFData", "param": ["foafIRI","spongerMode","sslFOAFCheck","outputMode","sslLoginCheck"]
+},
+"user.getFOAFSSLData": {
+"name": "user.getFOAFSSLData", "param": ["sslFOAFCheck","outputMode","sslLoginCheck"]
+},
+"user.getFacebookData": {
+"name": "user.getFacebookData", "param": ["fb","fields","outputMode"]
+},
+"user.getKnowsData": {
+"name": "user.getKnowsData", "param": ["sourceURI","spongerMode"]
+},
+"instance.create": {
+"name": "instance.create", "param": ["type","name","description","model","public"]
+},
+"instance.update": {
+"name": "instance.update", "param": ["inst_id","name","description","model","public"]
+},
+"instance.delete": {
+"name": "instance.delete", "param": ["inst_id"]
+},
+"instance.join": {
+"name": "instance.join", "param": ["inst_id"]
+},
+"instance.disjoin": {
+"name": "instance.disjoin", "param": ["inst_id"]
+},
+"instance.join_approve": {
+"name": "instance.join_approve", "param": ["inst_id","uname"]
+},
+"notification.services": {
+"name": "notification.services", "param": []
+},
+"instance.notification.set": {
+"name": "instance.notification.set", "param": ["inst_id","services"]
+},
+"instance.notification.cancel": {
+"name": "instance.notification.cancel", "param": ["inst_id","services"]
+},
+"instance.notification.log": {
+"name": "instance.notification.log", "param": ["inst_id"]
+},
+"instance.search": {
+"name": "instance.search", "param": ["pattern"]
+},
+"instance.get": {
+"name": "instance.get", "param": ["inst_id"]
+},
+"instance.get.id": {
+"name": "instance.get.id", "param": ["instanceName"]
+},
+"instance.freeze": {
+"name": "instance.freeze", "param": ["inst_id"]
+},
+"instance.unfreeze": {
+"name": "instance.unfreeze", "param": ["inst_id"]
+},
+"filtersData": {
+"name": "filtersData", "param": []
+},
+"site.search": {
+"name": "site.search", "param": ["pattern","options"]
+},
+"error_handler": {
+"name": "error_handler", "param": []
+},
+"salmon_endpoint": {
+"name": "salmon_endpoint", "param": []
+},
+"oauth_allowed": {
+"name": "oauth_allowed", "param": ["uri"]
+},
+"oauth_connect": {
+"name": "oauth_connect", "param": ["uri"]
+},
+"oauth_disconnect": {
+"name": "oauth_disconnect", "param": ["uri"]
+},
+"bookmark.get": {
+"name": "bookmark.get", "param": ["bookmark_id"]
+},
+"bookmark.new": {
+"name": "bookmark.new", "param": ["inst_id","uri","name","description","tags","folder_id"]
+},
+"bookmark.edit": {
+"name": "bookmark.edit", "param": ["bookmark_id","uri","name","description","tags","folder_id"]
+},
+"bookmark.delete": {
+"name": "bookmark.delete", "param": ["bookmark_id"]
+},
+"bookmark.folder.new": {
+"name": "bookmark.folder.new", "param": ["inst_id","path"]
+},
+"bookmark.folder.delete": {
+"name": "bookmark.folder.delete", "param": ["inst_id","path"]
+},
+"bookmark.import": {
+"name": "bookmark.import", "param": ["inst_id","source","sourceType","tags"]
+},
+"bookmark.export": {
+"name": "bookmark.export", "param": ["inst_id","contentType"]
+},
+"bookmark.annotation.get": {
+"name": "bookmark.annotation.get", "param": ["annotation_id"]
+},
+"bookmark.annotation.new": {
+"name": "bookmark.annotation.new", "param": ["bookmark_id","author","body"]
+},
+"bookmark.annotation.claim": {
+"name": "bookmark.annotation.claim", "param": ["annotation_id","claimIri","claimRelation","claimValue"]
+},
+"bookmark.annotation.delete": {
+"name": "bookmark.annotation.delete", "param": ["annotation_id"]
+},
+"bookmark.comment.get": {
+"name": "bookmark.comment.get", "param": ["comment_id"]
+},
+"bookmark.comment.new": {
+"name": "bookmark.comment.new", "param": ["bookmark_id","parent_id","title","text","name","email","url"]
+},
+"bookmark.comment.delete": {
+"name": "bookmark.comment.delete", "param": ["comment_id"]
+},
+"bookmark.publication.new": {
+"name": "bookmark.publication.new", "param": ["inst_id","name","updateType","updatePeriod","updateFreq","destinationType","destination","userName","userPassword","folderPath","tagsInclude","tagsExclude"]
+},
+"bookmark.publication.get": {
+"name": "bookmark.publication.get", "param": ["publication_id"]
+},
+"bookmark.publication.edit": {
+"name": "bookmark.publication.edit", "param": ["publication_id","name","updateType","updatePeriod","updateFreq","destinationType","destination","userName","userPassword","folderPath","tagsInclude","tagsExclude"]
+},
+"bookmark.publication.sync": {
+"name": "bookmark.publication.sync", "param": ["publication_id"]
+},
+"bookmark.publication.delete": {
+"name": "bookmark.publication.delete", "param": ["publication_id"]
+},
+"bookmark.subscription.new": {
+"name": "bookmark.subscription.new", "param": ["inst_id","name","updateType","updatePeriod","updateFreq","sourceType","source","userName","userPassword","folderPath","tags"]
+},
+"bookmark.subscription.get": {
+"name": "bookmark.subscription.get", "param": ["subscription_id"]
+},
+"bookmark.subscription.edit": {
+"name": "bookmark.subscription.edit", "param": ["subscription_id","name","updateType","updatePeriod","updateFreq","sourceType","source","userName","userPassword","folderPath","tags"]
+},
+"bookmark.subscription.sync": {
+"name": "bookmark.subscription.sync", "param": ["subscription_id"]
+},
+"bookmark.subscription.delete": {
+"name": "bookmark.subscription.delete", "param": ["subscription_id"]
+},
+"bookmark.options.set": {
+"name": "bookmark.options.set", "param": ["inst_id","options"]
+},
+"bookmark.options.get": {
+"name": "bookmark.options.get", "param": ["inst_id"]
+},
+"poll.get": {
+"name": "poll.get", "param": ["poll_id"]
+},
+"poll.new": {
+"name": "poll.new", "param": ["inst_id","name","description","tags","multi_vote","vote_result","vote_result_before","vote_result_opened","date_start","date_end","mode"]
+},
+"poll.edit": {
+"name": "poll.edit", "param": ["poll_id","name","description","tags","multi_vote","vote_result","vote_result_before","vote_result_opened","date_start","date_end","mode"]
+},
+"poll.delete": {
+"name": "poll.delete", "param": ["poll_id"]
+},
+"poll.question.new": {
+"name": "poll.question.new", "param": ["poll_id","questionNo","text","description","required","type","answer"]
+},
+"poll.question.delete": {
+"name": "poll.question.delete", "param": ["poll_id","questionNo"]
+},
+"poll.activate": {
+"name": "poll.activate", "param": ["poll_id"]
+},
+"poll.close": {
+"name": "poll.close", "param": ["poll_id"]
+},
+"poll.clear": {
+"name": "poll.clear", "param": ["poll_id"]
+},
+"poll.vote": {
+"name": "poll.vote", "param": ["poll_id"]
+},
+"poll.vote.answer": {
+"name": "poll.vote.answer", "param": ["vote_id","questionNo","answerNo","value"]
+},
+"poll.result": {
+"name": "poll.result", "param": ["poll_id"]
+},
+"poll.comment.get": {
+"name": "poll.comment.get", "param": ["comment_id"]
+},
+"poll.comment.new": {
+"name": "poll.comment.new", "param": ["poll_id","parent_id","title","text","name","email","url"]
+},
+"poll.comment.delete": {
+"name": "poll.comment.delete", "param": ["comment_id"]
+},
+"poll.options.set": {
+"name": "poll.options.set", "param": ["inst_id","options"]
+},
+"poll.options.get": {
+"name": "poll.options.get", "param": ["inst_id"]
+},
+"feeds.get": {
+"name": "feeds.get", "param": ["feed_id"]
+},
+"feeds.subscribe": {
+"name": "feeds.subscribe", "param": ["inst_id","uri","name","homeUri","tags","folder_id"]
+},
+"feeds.unsubscribe": {
+"name": "feeds.unsubscribe", "param": ["feed_id"]
+},
+"feeds.refresh": {
+"name": "feeds.refresh", "param": ["feed_id"]
+},
+"feeds.folder.new": {
+"name": "feeds.folder.new", "param": ["inst_id","path"]
+},
+"feeds.folder.delete": {
+"name": "feeds.folder.delete", "param": ["inst_id","path"]
+},
+"feeds.annotation.get": {
+"name": "feeds.annotation.get", "param": ["annotation_id"]
+},
+"feeds.annotation.new": {
+"name": "feeds.annotation.new", "param": ["inst_id","item_id","author","body"]
+},
+"feeds.annotation.claim": {
+"name": "feeds.annotation.claim", "param": ["annotation_id","claimIri","claimRelation","claimValue"]
+},
+"feeds.annotation.delete": {
+"name": "feeds.annotation.delete", "param": ["annotation_id"]
+},
+"feeds.comment.get": {
+"name": "feeds.comment.get", "param": ["comment_id"]
+},
+"feeds.comment.new": {
+"name": "feeds.comment.new", "param": ["inst_id","item_id","parent_id","title","text","name","email","url"]
+},
+"feeds.comment.delete": {
+"name": "feeds.comment.delete", "param": ["comment_id"]
+},
+"feeds.blog.subscribe": {
+"name": "feeds.blog.subscribe", "param": ["inst_id","name","api","uri","port","endpoint","user","password"]
+},
+"feeds.blog.unsubscribe": {
+"name": "feeds.blog.unsubscribe", "param": ["blog_id"]
+},
+"feeds.blog.refresh": {
+"name": "feeds.blog.refresh", "param": ["blog_id"]
+},
+"feeds.options.set": {
+"name": "feeds.options.set", "param": ["inst_id","options"]
+},
+"feeds.options.get": {
+"name": "feeds.options.get", "param": ["inst_id"]
+},
+"mail.message.get": {
+"name": "mail.message.get", "param": ["msg_id"]
+},
+"mail.message.new": {
+"name": "mail.message.new", "param": ["inst_id","toAddress","bcAddress","ccAddress","priority","subject","body"]
+},
+"mail.message.delete": {
+"name": "mail.message.delete", "param": ["msg_id"]
+},
+"mail.message.move": {
+"name": "mail.message.move", "param": ["msg_id","path"]
+},
+"mail.folder.new": {
+"name": "mail.folder.new", "param": ["inst_id","path"]
+},
+"mail.folder.delete": {
+"name": "mail.folder.delete", "param": ["inst_id","path"]
+},
+"mail.folder.rename": {
+"name": "mail.folder.rename", "param": ["inst_id","oldPath","newPath"]
+},
+"mail.options.set": {
+"name": "mail.options.set", "param": ["inst_id","options"]
+},
+"mail.options.get": {
+"name": "mail.options.get", "param": ["inst_id"]
+}
+}

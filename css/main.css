@@ -1,0 +1,32 @@
+/*
+ * Main css file containing all custom css classes and modifications which are
+ * not part of Bootstrap or jQuery but only belong to ODS.
+ */
+
+ /* 60px to make the bootstrap container go all the way to the bottom of the topbar */
+body {
+    padding-top: 60px;
+}
+
+/* less spacing between booptstrap form rows */
+.form-horizontal .control-group {
+    margin-bottom: 10px;
+}
+
+/* rounded corners on any element. */
+.rounded {
+    -webkit-border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+}
+
+.gravatar {
+    height: 22px;
+    float:left;
+    display:inline;
+    margin: 0px 10px 0px 10px;
+}
+
+.footer {
+    text-align:right;
+}

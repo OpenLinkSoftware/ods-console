@@ -1,0 +1,90 @@
+/* Author: Sebastian Trueg <trueg@openlinksw.com>
+
+*/
+
+/// The ODS session
+var s_odsSession = null;
+
+// all supported procedures
+var s_procedures = null;
+
+// the currently selected procedure
+var s_currentProcedure = null;
+
+/**
+ * Loads the form which contains fields for all method parameters.
+ */
+function loadMethodForm(methodName) {
+    console.log("loadMethodForm(" + methodName + ")");
+    s_currentProcedure = s_procedures[methodName];
+    
+    // clear previous forms
+    var paramForm = $('#params');
+    paramForm.html('');
+
+    // create a form field for each parameter
+    $.each(s_currentProcedure.param, function() {
+        var s = '<div class="control-group">';
+        s += '<label class="control-label" for="' + this + '">' + this + ':</label>';
+        s += '<div class="controls"><input class="parameter" id="' + this + '" type="text" /></div>';
+        s += "</div>";
+        paramForm.append(s);
+    });
+    
+    // show the parameters div
+    $('#apiParamsDiv').show();
+}
+
+/**
+ * Register methods to actions, events, and so on.
+ */
+$(document).ready(function() {
+    console.log("Ready");
+
+    var comboBox = $('#apiMethodSelector');
+
+    // load the methods
+    $.get("ods-functions", function(data) {
+        // "data" is a JSON stream of procedures
+        s_procedures = $.parseJSON(data); 
+        
+        $.each(s_procedures, function() {
+            comboBox.append('<option>' + this.name + '</option>'); 
+        });
+    });
+    
+    // load the method form on selection change
+    comboBox.change(function() {
+       loadMethodForm($(this).val());
+    });
+    
+    // execute the method on button click
+    $('input#executeButton').click(function(event) {
+        event.preventDefault();
+        
+        // create params
+        // 1. authentication
+        var params = {
+            user_name : document.pwdHashAuthForm.usr.value,
+            password_hash : $.sha1(document.pwdHashAuthForm.usr.value + document.pwdHashAuthForm.pwd.value)
+        };
+
+        // 2. the actual params
+        $('form#paramsForm').find('input.parameter').each(function() {
+            var val = this.value;
+            if(val != null && val.length > 0) {
+                params[this.id] = val;
+            }
+        });
+        
+        // create the query URL
+        var queryUrl = odsApiUrl(s_currentProcedure.name);
+        
+        // perform the query
+        $.get(queryUrl, params, function(result) {
+            $('#resultDiv').show();
+            console.log(result);
+            $('#result').text(result);
+        }, 'text');
+    });
+});
