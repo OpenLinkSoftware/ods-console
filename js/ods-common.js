@@ -1,22 +1,3 @@
-
-/// The ODS instance host
-var odsHost = "localhost:8890";
-var odsSSLHost = "localhost:4433";
-
-/**
- * Construct an ODS API URL with optional ssl.
- * \param methodName The name of the method to call.
- * \param ssl If \p true the returned URL will use the https protocol.
- */
-function odsApiUrl(methodName, ssl) {
-    if(ssl == 1 || /* HACK: work around local CORS issues */ document.location.protocol == "https:") {
-        return "https://" + odsSSLHost + "/ods/api/" + methodName;
-    }
-    else {
-        return "http://" + odsHost + "/ods/api/" + methodName;
-    }
-}
-
 /**
  * Create an ODS DAV URL.
  * \param path The path to the file in the DAV system.
@@ -31,10 +12,10 @@ function extractODSErrorMessage(result) {
 
 /**
  * Check if a standard ODS error code result is an error or not.
- * 
+ *
  * \param root The root XML element as returned by the ODS REST call.
  * \param showMessage If \p true a message box will pop up with the error message.
- * 
+ *
  * \return \p true if it is in fact an error.
  */
 function hasError(root, showMessage) {
@@ -57,9 +38,9 @@ function hasError(root, showMessage) {
 
 /**
  * Check if an email address is properly formatted.
- * 
+ *
  * \param {String} email The candidate email address.
- * 
+ *
  * \return \p true if the email address is properly formatted.
  */
 function checkEmailAddress(email) {
@@ -88,7 +69,7 @@ var ODS = (function() {
              * \return A jQuery jqXHR object. FIXME: do our own processing.
              */
             apiCall: function(method, params) {
-                return $.get(odsApiUrl(method), $.extend({ realm: "wa", sid: m_sessionId }, params));
+                return $.get(ODS.createOdsApiUrl(method), $.extend({ realm: "wa", sid: m_sessionId }, params));
             },
 
             sessionId: function() { return m_sessionId; },
@@ -161,11 +142,14 @@ var ODS = (function() {
         };
     };
 
+    // Member variables
+    var m_odsHost = null;
+    var m_odsSslHost = null;
 
     return {
         /**
          * \brief Create a new ODS session with password hash authentication.
-         * 
+         *
          * \param usr The user name.
          * \param pwd The password.
          * \param success A callback function which has one parameter: the new
@@ -175,7 +159,7 @@ var ODS = (function() {
          * - A human readable error message. TODO: translate the error message.
          */
         createSession: function(usr, pwd, success, error) {
-            var authenticationUrl = odsApiUrl("user.authenticate", 0),
+            var authenticationUrl = ODS.createOdsApiUrl("user.authenticate", 0),
                 authenticationParams = {
                     user_name : usr,
                     password_hash : $.sha1(usr + pwd)
@@ -205,7 +189,7 @@ var ODS = (function() {
         },
 
         createWebIDSession: function(success, error) {
-            var authenticationUrl = odsApiUrl("user.authenticate", 1);
+            var authenticationUrl = ODS.createOdsApiUrl("user.authenticate", 1);
 
             if(error == null) {
                 error = function(msg) { alert(msg); };
@@ -249,7 +233,7 @@ var ODS = (function() {
             }
 
             // check if the session is still valid by fetching user details
-            $.get(odsApiUrl("user.info"), { realm: "wa", sid: sessionId }).success(function(result) {
+            $.get(ODS.createOdsApiUrl("user.info"), { realm: "wa", sid: sessionId }).success(function(result) {
                 var name = $(result).find("name").text();
                 var fullName = $(result).find("fullName").text();
                 var photo = $(result).find("photo").text();
@@ -264,6 +248,62 @@ var ODS = (function() {
                 // FIXME: handle error
                 error("AJAX call failed.");
             });
+        },
+
+        /**
+         * @brief Set the ODS host address.
+         *
+         * This ODS framework can connect to any ODS instance, given that
+         * CORS is configured properly.
+         *
+         * By default the host is empty (null) which means that the ODS instance
+         * is expected to run on the serving machine.
+         *
+         * In order to change the default this method can be used to set the host
+         * name and an optional SSL host.
+         *
+         * @param host The hostname of the ODS instance.
+         * @param sslHost An optional hostname for SSL access to the ODS instance.
+         *
+         * Examples:
+         * @code
+         * ODS.setOdsHost("localhost:8890", "localhost::4433");
+         * @endcode
+         */
+        setOdsHost: function(host, sslHost) {
+            m_odsHost = host;
+            m_odsSslHost = sslHost;
+        },
+
+        /// @sa setOdsHost
+        getOdsHost: function() {
+            return m_odsHost;
+        },
+
+        /// @sa setOdsHost
+        getOdsSslHost: function() {
+            return m_odsSslHost;
+        },
+
+        /**
+         * @brief Construct an ODS API URL with optional ssl.
+         *
+         * Normally one should rather use a session.
+         *
+         * @param methodName The name of the method to call.
+         * @param ssl If \p true the returned URL will use the https protocol.
+         *
+         * @return A new URL which can be used for an HTTP call.
+         */
+        createOdsApiUrl: function (methodName, ssl) {
+            var oh = m_odsHost == null || m_odsHost.length == 0 ? window.location.host : m_odsHost;
+            var os = m_odsSslHost == null || m_odsSslHost.length == 0 ? oh : m_odsSslHost;
+            if(ssl == 1 || /* HACK: work around local CORS issues */ window.location.protocol == "https:") {
+                return "https://" + os + "/ods/api/" + methodName;
+            }
+            else {
+                return "http://" + oh + "/ods/api/" + methodName;
+            }
         }
-    }
+    };
 })();

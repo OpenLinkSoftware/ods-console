@@ -2,14 +2,33 @@
 
 */
 
-/// The ODS session
-var s_odsSession = null;
-
 // all supported procedures
 var s_procedures = null;
 
 // the currently selected procedure
 var s_currentProcedure = null;
+
+/**
+ * Load the persistent local storage config
+ * into the session and into the cfgDlg.
+ */
+function loadConfig() {
+    ODS.setOdsHost(localStorage.odsHost);
+    $('input#cfgHost').val(ODS.getOdsHost());
+}
+
+/**
+ * Saves the config from the current cfgDlg values
+ * and writes them to the local storage.
+ */
+function saveConfig() {
+    // update the session config
+    console.log("Saving host " + $('input#cfgHost').val());
+    ODS.setOdsHost($('input#cfgHost').val());
+
+    // update the persistent config
+    localStorage.odsHost = ODS.getOdsHost();
+}
 
 /**
  * Loads the form which contains fields for all method parameters.
@@ -41,23 +60,25 @@ function loadMethodForm(methodName) {
 $(document).ready(function() {
     console.log("Ready");
 
+    loadConfig();
+
     var comboBox = $('#apiMethodSelector');
 
     // load the methods
     $.get("ods-functions", function(data) {
         // "data" is a JSON stream of procedures
         s_procedures = $.parseJSON(data); 
-        
+
         $.each(s_procedures, function() {
             comboBox.append('<option>' + this.name + '</option>'); 
         });
     });
-    
+
     // load the method form on selection change
     comboBox.change(function() {
        loadMethodForm($(this).val());
     });
-    
+
     // execute the method on button click
     $('input#executeButton').click(function(event) {
         event.preventDefault();
@@ -76,15 +97,35 @@ $(document).ready(function() {
                 params[this.id] = val;
             }
         });
-        
+
         // create the query URL
-        var queryUrl = odsApiUrl(s_currentProcedure.name);
-        
+        var queryUrl = ODS.createOdsApiUrl(s_currentProcedure.name);
+
         // perform the query
         $.get(queryUrl, params, function(result) {
             $('#resultDiv').show();
             console.log(result);
             $('#result').text(result);
         }, 'text');
+    });
+
+    // setup the config dialog
+    $('div#cfgDlg').find('input').keydown(function(e) {
+        // save on ENTER
+        if(e.keyCode == 13) {
+            // do not submit the form
+            e.preventDefault();
+            saveConfig();
+            $('#cfgDlg').modal('hide');
+        }
+    });
+    $('a#cfgSave').click(function(e) {
+        e.preventDefault();
+
+        // save the config
+        saveConfig();
+
+        // hide the cfg dialog
+        $('#cfgDlg').modal('hide');
     });
 });
