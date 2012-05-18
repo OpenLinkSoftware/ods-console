@@ -8,13 +8,24 @@ var s_procedures = null;
 // the currently selected procedure
 var s_currentProcedure = null;
 
+// config setting. If true (set via config dlg)
+var s_rememberValues = false;
+
+// config setting: all remembered values
+var s_rememberedValues = null;
+
 /**
  * Load the persistent local storage config
  * into the session and into the cfgDlg.
  */
 function loadConfig() {
+    // load session config
     ODS.setOdsHost(localStorage.odsHost);
+    s_rememberValues = (localStorage.rememberValues == "yes");
+
+    // update cfg dialog
     $('input#cfgHost').val(ODS.getOdsHost());
+    $('input#cfgRememberValues').attr('checked', s_rememberValues ? "checked" : undefined);
 }
 
 /**
@@ -25,9 +36,12 @@ function saveConfig() {
     // update the session config
     console.log("Saving host " + $('input#cfgHost').val());
     ODS.setOdsHost($('input#cfgHost').val());
+    s_rememberValues = ($('input#cfgRememberValues').attr('checked') == "checked");
+    console.log("Saving remember values: " + s_rememberValues);
 
     // update the persistent config
     localStorage.odsHost = ODS.getOdsHost();
+    localStorage.rememberValues = s_rememberValues ? "yes" : null;
 }
 
 /**
@@ -50,6 +64,14 @@ function loadMethodForm(methodName) {
         paramForm.append(s);
     });
     
+    if(s_rememberValues && s_rememberedValues) {
+        if(s_rememberedValues.hasOwnProperty(s_currentProcedure.name)) {
+            $.each(s_rememberedValues[s_currentProcedure.name], function(key, value) {
+                paramForm.find("input#" + key).val(value);
+            });
+        }
+    }
+
     // show the parameters div
     $('#apiParamsDiv').show();
 }
@@ -82,6 +104,25 @@ function executeMethod() {
         console.log(result);
         $('#result').text(result);
     }, 'text');
+
+    // remember used values
+    if(s_rememberValues) {
+        // we do not want to store the authentication information
+        delete params.user_name;
+        delete params.password_hash;
+
+        // store the last used values for all methods
+        s_rememberedValues = s_rememberedValues || {};
+        s_rememberedValues[s_currentProcedure.name] = {};
+        $.each(params, function(key, value) {
+            s_rememberedValues[s_currentProcedure.name][key] = value;
+        });
+
+        // (localStorage does not support objects)
+        localStorage.odsValues = JSON.stringify(s_rememberedValues);
+
+        console.log(s_rememberedValues);
+    }
 }
 
 /**
@@ -91,6 +132,11 @@ $(document).ready(function() {
     console.log("Ready");
 
     loadConfig();
+
+    // optionally load the last used values for all methods
+    if(s_rememberValues && typeof localStorage.odsValues == "string") {
+        s_rememberedValues = JSON.parse(localStorage.odsValues);
+    }
 
     var comboBox = $('#apiMethodSelector');
 
