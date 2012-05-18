@@ -55,6 +55,36 @@ function loadMethodForm(methodName) {
 }
 
 /**
+ * Executes the ODS method and saves the result into the result div.
+ */
+function executeMethod() {
+    // create params
+    // 1. authentication
+    var params = {
+        user_name : document.pwdHashAuthForm.usr.value,
+        password_hash : $.sha1(document.pwdHashAuthForm.usr.value + document.pwdHashAuthForm.pwd.value)
+    };
+
+    // 2. the actual params
+    $('form#paramsForm').find('input.parameter').each(function() {
+        var val = this.value;
+        if(val != null && val.length > 0) {
+            params[this.id] = val;
+        }
+    });
+
+    // create the query URL
+    var queryUrl = ODS.createOdsApiUrl(s_currentProcedure.name);
+
+    // perform the query
+    $.get(queryUrl, params, function(result) {
+        $('#resultDiv').show();
+        console.log(result);
+        $('#result').text(result);
+    }, 'text');
+}
+
+/**
  * Register methods to actions, events, and so on.
  */
 $(document).ready(function() {
@@ -82,31 +112,16 @@ $(document).ready(function() {
     // execute the method on button click
     $('input#executeButton').click(function(event) {
         event.preventDefault();
-        
-        // create params
-        // 1. authentication
-        var params = {
-            user_name : document.pwdHashAuthForm.usr.value,
-            password_hash : $.sha1(document.pwdHashAuthForm.usr.value + document.pwdHashAuthForm.pwd.value)
-        };
-
-        // 2. the actual params
-        $('form#paramsForm').find('input.parameter').each(function() {
-            var val = this.value;
-            if(val != null && val.length > 0) {
-                params[this.id] = val;
-            }
-        });
-
-        // create the query URL
-        var queryUrl = ODS.createOdsApiUrl(s_currentProcedure.name);
-
-        // perform the query
-        $.get(queryUrl, params, function(result) {
-            $('#resultDiv').show();
-            console.log(result);
-            $('#result').text(result);
-        }, 'text');
+        executeMethod();
+    });
+    // execute the method on pressing enter
+    $('div#params').find('input').keydown(function(e) {
+        // save on ENTER
+        if(e.keyCode == 13) {
+            // do not submit the form
+            e.preventDefault();
+            executeMethod();
+        }
     });
 
     // setup the config dialog
