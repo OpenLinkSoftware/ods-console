@@ -45,6 +45,53 @@ function saveConfig() {
 }
 
 /**
+ * Extract the module names from all method names and add them as options
+ * into the module selection combobox.
+ */
+function loadMethodModules() {
+    // get the list of modules by extracting prefixes from all methods
+    var modules = [];
+    $.each(s_procedures, function() {
+        var i = this.name.indexOf(".");
+        if(i > 0) {
+            var prefix = this.name.substr(0, i);
+            if(modules.indexOf(prefix) == -1) {
+                modules.push(prefix);
+            }
+        }
+    });
+
+    // populate the modules combobox
+    var comboBox = $('#apiModuleSelector');
+    $.each(modules, function() {
+        comboBox.append('<option>' + this + '</option>');
+    });
+}
+
+/**
+ * Load the methods into the combobox taking the currently selected module into account.
+ */
+function loadMethods() {
+    var comboBox = $('#apiMethodSelector');
+
+    // get the module prefix from the module combobox
+    var modPrefix = $('#apiModuleSelector').val();
+    if(modPrefix == "all") {
+        modPrefix = "";
+    }
+
+    // reset list
+    comboBox.html('<option name="none">Please select a method</option>');
+
+    // populate list
+    $.each(s_procedures, function() {
+        if(this.name.substr(0, modPrefix.length) == modPrefix) {
+            comboBox.append('<option>' + this.name + '</option>');
+        }
+    });
+}
+
+/**
  * Loads the form which contains fields for all method parameters.
  */
 function loadMethodForm(methodName) {
@@ -138,20 +185,20 @@ $(document).ready(function() {
         s_rememberedValues = JSON.parse(localStorage.odsValues);
     }
 
-    var comboBox = $('#apiMethodSelector');
-
-    // load the methods
+    // load the methods and modules
     $.get("ods-functions", function(data) {
         // "data" is a JSON stream of procedures
         s_procedures = $.parseJSON(data); 
 
-        $.each(s_procedures, function() {
-            comboBox.append('<option>' + this.name + '</option>'); 
-        });
+        loadMethodModules();
+        loadMethods();
     });
 
     // load the method form on selection change
-    comboBox.change(function() {
+    $('#apiModuleSelector').change(function() {
+        loadMethods();
+     });
+    $('#apiMethodSelector').change(function() {
        loadMethodForm($(this).val());
     });
 

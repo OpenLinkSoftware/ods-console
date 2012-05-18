@@ -151,10 +151,15 @@
       <h3>Choose an API method</h3>
       <form class="form-horizontal">
         <div class="control-group">
-          <label class="control-label" for="method"></label>
+          <label class="control-label" for="method">API Module:</label>
           <div class="controls">
-            <select id="apiMethodSelector"><option name="none">Please
-                select a method</option></select>
+            <select id="apiModuleSelector"><option value="all">All Modules</option></select>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="method">API Method:</label>
+          <div class="controls">
+            <select id="apiMethodSelector"></select>
           </div>
         </div>
       </form>
