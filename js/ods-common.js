@@ -298,7 +298,7 @@ var ODS = (function() {
         createOdsApiUrl: function (methodName, ssl) {
             var oh = m_odsHost == null || m_odsHost.length == 0 ? window.location.host : m_odsHost;
             var os = m_odsSslHost == null || m_odsSslHost.length == 0 ? oh : m_odsSslHost;
-            if(ssl == 1 || /* HACK: work around local CORS issues */ window.location.protocol == "https:") {
+            if(ssl == true || /* HACK: work around local CORS issues */ window.location.protocol == "https:") {
                 return "https://" + os + "/ods/api/" + methodName;
             }
             else {

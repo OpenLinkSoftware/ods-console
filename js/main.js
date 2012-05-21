@@ -128,12 +128,27 @@ function loadMethodForm(methodName) {
  */
 function executeMethod() {
     // create params
-    var params = {};
+    var params = {},
+        authTab = '',
+        queryUrl = '',
+        webIdAuth = false;
 
     // 1. authentication
     if($('input#needAuth').attr("checked")) {
-        params.user_name = document.pwdHashAuthForm.usr.value;
-        params.password_hash = $.sha1(document.pwdHashAuthForm.usr.value + document.pwdHashAuthForm.pwd.value);
+        authTab = $('div#authenticationTabContent').find('div.tab-pane.active').attr('id');
+        if( authTab == 'authenticationTabHash') {
+            // hash authentication
+            params.user_name = document.pwdHashAuthForm.usr.value;
+            params.password_hash = $.sha1(document.pwdHashAuthForm.usr.value + document.pwdHashAuthForm.pwd.value);
+        }
+        else if( authTab == 'authenticationTabSid' ) {
+            // session id authentication
+            params.sid = document.sessionIdAuthForm.sessionId.value;
+            params.realm = "wa";
+        }
+        else {
+            webIdAuth = true;
+        }
     }
 
     // 2. the actual params
@@ -145,7 +160,7 @@ function executeMethod() {
     });
 
     // create the query URL
-    var queryUrl = ODS.createOdsApiUrl(s_currentProcedure.name);
+    queryUrl = ODS.createOdsApiUrl(s_currentProcedure.name, webIdAuth);
 
     // perform the query
     $.get(queryUrl, params, function(result) {
@@ -169,8 +184,6 @@ function executeMethod() {
 
         // (localStorage does not support objects)
         localStorage.odsValues = JSON.stringify(s_rememberedValues);
-
-        console.log(s_rememberedValues);
     }
 }
 
