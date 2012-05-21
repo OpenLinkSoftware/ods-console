@@ -128,11 +128,13 @@ function loadMethodForm(methodName) {
  */
 function executeMethod() {
     // create params
+    var params = {};
+
     // 1. authentication
-    var params = {
-        user_name : document.pwdHashAuthForm.usr.value,
-        password_hash : $.sha1(document.pwdHashAuthForm.usr.value + document.pwdHashAuthForm.pwd.value)
-    };
+    if($('input#needAuth').attr("checked")) {
+        params.user_name = document.pwdHashAuthForm.usr.value;
+        params.password_hash = $.sha1(document.pwdHashAuthForm.usr.value + document.pwdHashAuthForm.pwd.value);
+    }
 
     // 2. the actual params
     $('form#paramsForm').find('input.parameter').each(function() {
@@ -235,5 +237,15 @@ $(document).ready(function() {
 
         // hide the cfg dialog
         $('#cfgDlg').modal('hide');
+    });
+
+    // hide/show the authentication panel based on the checkbox
+    $('input#needAuth').change(function() {
+        if($(this).attr("checked")) {
+            $('div#authenticationDiv').show();
+        }
+        else {
+            $('div#authenticationDiv').hide();
+        }
     });
 });
