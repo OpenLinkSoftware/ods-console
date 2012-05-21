@@ -106,7 +106,7 @@ function loadMethodForm(methodName) {
     $.each(s_currentProcedure.param, function() {
         var s = '<div class="control-group">';
         s += '<label class="control-label" for="' + this + '">' + this + ':</label>';
-        s += '<div class="controls"><input class="parameter" id="' + this + '" type="text" /></div>';
+        s += '<div class="controls"><input class="parameter input-xxlarge" id="' + this + '" type="text" /></div>';
         s += "</div>";
         paramForm.append(s);
     });
