@@ -97,7 +97,7 @@ function loadMethods() {
 function loadMethodForm(methodName) {
     console.log("loadMethodForm(" + methodName + ")");
     s_currentProcedure = s_procedures[methodName];
-    
+
     // clear previous forms
     var paramForm = $('#params');
     paramForm.html('');
@@ -110,7 +110,7 @@ function loadMethodForm(methodName) {
         s += "</div>";
         paramForm.append(s);
     });
-    
+
     if(s_rememberValues && s_rememberedValues) {
         if(s_rememberedValues.hasOwnProperty(s_currentProcedure.name)) {
             $.each(s_rememberedValues[s_currentProcedure.name], function(key, value) {
@@ -228,7 +228,7 @@ $(document).ready(function() {
     // load the methods and modules
     $.get("ods-functions", function(data) {
         // "data" is a JSON stream of procedures
-        s_procedures = $.parseJSON(data); 
+        s_procedures = $.parseJSON(data);
 
         loadMethodModules();
         loadMethods();
