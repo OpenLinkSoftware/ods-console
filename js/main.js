@@ -123,6 +123,31 @@ function loadMethodForm(methodName) {
     $('#apiParamsDiv').show();
 }
 
+
+/**
+ * Format the result. Try to be smart about the formatting.
+ */
+function formatResult(result) {
+    // we try to detect XML and JSon.
+    try {
+        var parsed = JSON.parse(result);
+        if(parsed) {
+            // format JSON
+            return vkbeautify.json(result);
+        }
+    } catch(err) {}
+
+    // try XML
+    parsed = $.parseXML(result);
+    if(parsed) {
+        // format the XML
+        return vkbeautify.xml(result);
+    }
+
+    // fallback
+    return result;
+}
+
 /**
  * Executes the ODS method and saves the result into the result div.
  */
@@ -165,8 +190,8 @@ function executeMethod() {
     // perform the query
     $.get(queryUrl, params, function(result) {
         $('#resultDiv').show();
-        console.log(result);
-        $('#result').text(result);
+        $('#resultFancy').text(formatResult(result));
+        $('#resultRaw').text(result);
     }, 'text');
 
     // remember used values
