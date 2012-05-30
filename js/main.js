@@ -283,7 +283,19 @@ $(document).ready(function() {
         loadMethods();
 
         // if the URL contains a method to select we do that
-        loadMethod($.address.parameter("method"));
+        var method = $.address.parameter("method");
+        if(method) {
+            // load the requested method
+            loadMethod(method);
+
+            // load the requested parameters
+            var paramForm = $('#params');
+            $.each($.address.parameterNames(), function() {
+                if(this != "method") {
+                    paramForm.find("input#" + this).val($.address.parameter(this));
+                }
+            });
+        }
     });
 
     // load the method form on selection change
