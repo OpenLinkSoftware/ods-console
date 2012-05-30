@@ -311,6 +311,7 @@ $(document).ready(function() {
     $('#selectMethodAuthenticate').click(function(e) {
        e.preventDefault();
        console.log("selecting user.authenticate");
+       $('#authenticationTab a:first').tab('show');
        $('#apiModuleSelector').val("user");
        loadMethods(function() {
            $('#apiMethodSelector').val("user.authenticate");
