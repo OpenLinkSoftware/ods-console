@@ -92,7 +92,7 @@ function loadMethodModules() {
 /**
  * Load the methods into the combobox taking the currently selected module into account.
  */
-function loadMethods(finishCallback) {
+function loadMethods() {
     var comboBox = $('#apiMethodSelector');
 
     // get the module prefix from the module combobox
@@ -110,11 +110,6 @@ function loadMethods(finishCallback) {
             comboBox.append('<option>' + this.name + '</option>');
         }
     });
-
-    // execute the callback
-    if(finishCallback) {
-        finishCallback();
-    }
 }
 
 /**
@@ -135,10 +130,9 @@ function loadMethod(methodName) {
 
     // load the data into the comboboxes
     $('#apiModuleSelector').val(mod);
-    loadMethods(function() {
-        $('#apiMethodSelector').val(methodName);
-        loadMethodForm(methodName);
-    });
+    loadMethods();
+    $('#apiMethodSelector').val(methodName);
+    loadMethodForm(methodName);
 }
 
 /**
