@@ -136,6 +136,9 @@ function loadMethodForm(methodName) {
 
     // show the parameters div
     $('#apiParamsDiv').show();
+
+    // hide the results in case they are still there from a previous run
+    $('#resultDiv').hide();
 }
 
 
