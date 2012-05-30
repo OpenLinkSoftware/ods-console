@@ -15,6 +15,16 @@ var s_rememberValues = false;
 var s_rememberedValues = null;
 
 /**
+ * Shows a spinner in the main content area
+ */
+function showSpinner() {
+    $("div#content").spinner({ position: 'center', hide: true });
+}
+function hideSpinner() {
+    $("div#content").spinner("remove");
+}
+
+/**
  * Load the persistent local storage config
  * into the session and into the cfgDlg.
  */
@@ -188,7 +198,9 @@ function executeMethod() {
     queryUrl = ODS.createOdsApiUrl(s_currentProcedure.name, webIdAuth);
 
     // perform the query
+    showSpinner();
     $.get(queryUrl, params, function(result) {
+        hideSpinner();
         $('#resultDiv').show();
         $('#resultFancy').text(formatResult(result));
         $('#resultRaw').text(result);
