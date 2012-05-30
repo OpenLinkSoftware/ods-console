@@ -122,6 +122,28 @@
   </div>
 
 
+  <!-- The Help Window -->
+  <div id="helpDlg" class="modal hide">
+    <div class="modal-header">
+      <button class="close" data-dismiss="modal">&times;</button>
+      <h3>ODS Console Help</h3>
+    </div>
+    <div class="modal-body">
+      <p>
+        The ODS Console allows to execute any method from the ODS
+        RESTful API through a very simple UI. This involves the
+        following steps:
+        <ol>
+          <li>Choose the method to execute. Either choose one from the full list of methods or restrict the selection to a specific ODS module (like "Calendar") first.</li>
+          <li>Choose an authentication method and enter the credentials. Or choose to disable authentication to test methods that do not require authentication or to verify that a certain method actually fails without.</li>
+          <li>Insert the parameters required for the method. <em>(Hint: the configuration allows to remember values from the last execution of that exact method.)</em></li>
+          <li>Hit the "Submit" button and wait for the result to appear.</li>
+        </ol>
+      </p>
+    </div>
+  </div>
+
+
   <!-- Add your site or application content here -->
   <header>
     <div class="navbar navbar-fixed-top">
@@ -144,6 +166,7 @@
     <div class="btn-toolbar">
       <div class="btn-group">
         <a id="buttonConfigure" class="btn" data-toggle="modal" href="#cfgDlg"><i class="icon-wrench"></i> Configure</a>
+        <a id="buttonHelp" class="btn" data-toggle="modal" href="#helpDlg"><i class="icon-question-sign"></i> Help</a>
       </div>
     </div>
 
