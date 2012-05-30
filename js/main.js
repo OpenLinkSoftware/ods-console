@@ -81,7 +81,7 @@ function loadMethodModules() {
 /**
  * Load the methods into the combobox taking the currently selected module into account.
  */
-function loadMethods() {
+function loadMethods(finishCallback) {
     var comboBox = $('#apiMethodSelector');
 
     // get the module prefix from the module combobox
@@ -99,6 +99,11 @@ function loadMethods() {
             comboBox.append('<option>' + this.name + '</option>');
         }
     });
+
+    // execute the callback
+    if(finishCallback) {
+        finishCallback();
+    }
 }
 
 /**
@@ -297,5 +302,16 @@ $(document).ready(function() {
         else {
             $('div#authenticationDiv').hide();
         }
+    });
+
+    // select the user.authenticate method when the user clicks it in the session id tab
+    $('#selectMethodAuthenticate').click(function(e) {
+       e.preventDefault();
+       console.log("selecting user.authenticate");
+       $('#apiModuleSelector').val("user");
+       loadMethods(function() {
+           $('#apiMethodSelector').val("user.authenticate");
+           loadMethodForm("user.authenticate");
+       });
     });
 });

@@ -214,6 +214,7 @@
       <!-- Tab content -->
       <div id="authenticationTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="authenticationTabHash">
+          <p>Enter the plain credentials. This is the most basic way of authentication.</p>
           <form name="pwdHashAuthForm" class="form-horizontal">
             <div class="control-group">
               <label class="control-label" for="usr">Username:</label>
@@ -231,6 +232,7 @@
         </div>
 
         <div class="tab-pane fade" id="authenticationTabSid">
+          <p>Specify the session ID as created via <a id="selectMethodAuthenticate" href="#">user.authenticate</a>.</p>
           <form name="sessionIdAuthForm" class="form-horizontal">
             <div class="control-group">
               <label class="control-label" for="sessionId">Session Id:</label>
@@ -242,6 +244,7 @@
         </div>
 
         <div class="tab-pane fade" id="authenticationTabWebId">
+          <p><b>Caution/Fixme: WebID authentication might not work!</b></p>
           <p>The Server will request a certificate if the selected method requires authentication.</p>
         </div>
       </div>
