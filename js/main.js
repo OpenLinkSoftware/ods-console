@@ -55,6 +55,20 @@ function saveConfig() {
 }
 
 /**
+ * Extracts the module name from a method name.
+ * @return The module name or null if the method does not contain a module.
+ */
+function extractModule(name) {
+    var i = name.indexOf(".");
+    if(i > 0) {
+        return name.substr(0, i);
+    }
+    else {
+        return null;
+    }
+}
+
+/**
  * Extract the module names from all method names and add them as options
  * into the module selection combobox.
  */
@@ -62,12 +76,9 @@ function loadMethodModules() {
     // get the list of modules by extracting prefixes from all methods
     var modules = [];
     $.each(s_procedures, function() {
-        var i = this.name.indexOf(".");
-        if(i > 0) {
-            var prefix = this.name.substr(0, i);
-            if(modules.indexOf(prefix) == -1) {
-                modules.push(prefix);
-            }
+        var prefix = extractModule(this.name);
+        if(prefix != null && modules.indexOf(prefix) == -1) {
+            modules.push(prefix);
         }
     });
 
@@ -104,6 +115,30 @@ function loadMethods(finishCallback) {
     if(finishCallback) {
         finishCallback();
     }
+}
+
+/**
+ * Loads a method into the selection boxes and into the form.
+ */
+function loadMethod(methodName) {
+    console.log("loadMethod(" + methodName + ")");
+
+    if(!methodName) {
+        return;
+    }
+
+    // split module
+    var mod = extractModule(methodName);
+    if(mod == null) {
+        mod = "all";
+    }
+
+    // load the data into the comboboxes
+    $('#apiModuleSelector').val(mod);
+    loadMethods(function() {
+        $('#apiMethodSelector').val(methodName);
+        loadMethodForm(methodName);
+    });
 }
 
 /**
@@ -252,6 +287,9 @@ $(document).ready(function() {
 
         loadMethodModules();
         loadMethods();
+
+        // if the URL contains a method to select we do that
+        loadMethod($.address.parameter("method"));
     });
 
     // load the method form on selection change
@@ -312,10 +350,6 @@ $(document).ready(function() {
        e.preventDefault();
        console.log("selecting user.authenticate");
        $('#authenticationTab a:first').tab('show');
-       $('#apiModuleSelector').val("user");
-       loadMethods(function() {
-           $('#apiMethodSelector').val("user.authenticate");
-           loadMethodForm("user.authenticate");
-       });
+       loadMethod("user.authenticate");
     });
 });
