@@ -115,7 +115,7 @@ function loadMethods() {
 /**
  * Loads a method into the selection boxes and into the form.
  */
-function loadMethod(methodName) {
+function loadMethod(methodName, ignorePrevValues) {
     console.log("loadMethod(" + methodName + ")");
 
     if(!methodName) {
@@ -132,13 +132,13 @@ function loadMethod(methodName) {
     $('#apiModuleSelector').val(mod);
     loadMethods();
     $('#apiMethodSelector').val(methodName);
-    loadMethodForm(methodName);
+    loadMethodForm(methodName, ignorePrevValues);
 }
 
 /**
  * Loads the form which contains fields for all method parameters.
  */
-function loadMethodForm(methodName) {
+function loadMethodForm(methodName, ignorePrevValues) {
     console.log("loadMethodForm(" + methodName + ")");
     s_currentProcedure = s_procedures[methodName];
 
@@ -155,7 +155,7 @@ function loadMethodForm(methodName) {
         paramForm.append(s);
     });
 
-    if(s_rememberValues && s_rememberedValues) {
+    if(ignorePrevValues != true && s_rememberValues && s_rememberedValues) {
         if(s_rememberedValues.hasOwnProperty(s_currentProcedure.name)) {
             $.each(s_rememberedValues[s_currentProcedure.name], function(key, value) {
                 paramForm.find("input#" + key).val(value);
@@ -286,14 +286,28 @@ $(document).ready(function() {
         var method = $.address.parameter("method");
         if(method) {
             // load the requested method
-            loadMethod(method);
+            loadMethod(method, true);
+
+            // load authentication values (usr,pwd,sid)
+            var sid = $.address.parameter("sid");
+            if(sid) {
+                $('#authenticationTab a:eq(1)').tab('show');
+                $('#sessionId').val(sid);
+            }
+            else {
+                $('#authenticationTab a:eq(0)').tab('show');
+                var usr = $.address.parameter("usr"),
+                    pwd = $.address.parameter("pwd");
+                if(usr) {
+                    $('#usr').val(usr);
+                    $('#pwd').val(pwd);
+                }
+            }
 
             // load the requested parameters
             var paramForm = $('#params');
             $.each($.address.parameterNames(), function() {
-                if(this != "method") {
-                    paramForm.find("input#" + this).val($.address.parameter(this));
-                }
+                paramForm.find("input#" + this).val($.address.parameter(this));
             });
         }
     });
