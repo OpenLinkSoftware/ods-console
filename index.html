@@ -129,6 +129,7 @@
       <h3>ODS Console Help</h3>
     </div>
     <div class="modal-body">
+      <h4>General Help</h4>
       <p>
         The ODS Console allows to execute any method from the ODS
         RESTful API through a very simple UI. This involves the
@@ -140,6 +141,16 @@
           <li>Hit the "Submit" button and wait for the result to appear.</li>
         </ol>
       </p>
+      <h4>Advanced Help</h4>
+      <p>The ODS console allows to specify method and parameters in the URL.
+        This is useful for tutorials and such which can thus, directly link
+        to the graphical execution of one method call.</p>
+      <p>Parameters are attached to the URL using common hash-navigation patterns.
+        The method may be specified as follows: <pre>http://HOST/ods-console/#?method=user.authenticate</pre></p>
+      <p>Authentication paramters are: <em>usr</em> and <em>pwd</em> for password hash authentication
+        and <em>sid</em> for session ID authentication.</p>
+      <p>Other parameters are mapped to the method's parameters. So in order to provide the user name with the
+        <em>user.get</em> method the following URl can be used: <pre>http://HOST/ods-console/#?method=user.get&name=demo</pre></p>
     </div>
   </div>
 
