@@ -168,6 +168,12 @@ function loadMethodForm(methodName, ignorePrevValues) {
 
     // hide the results in case they are still there from a previous run
     $('#resultDiv').hide();
+
+    // update the query URL whenever a parameter changes
+    $('.parameter').change(updateQueryUrlDisplay);
+
+    // update the query URL display
+    updateQueryUrlDisplay();
 }
 
 
@@ -196,9 +202,9 @@ function formatResult(result) {
 }
 
 /**
- * Executes the ODS method and saves the result into the result div.
+ * Returns a dict with members "url" and "params"
  */
-function executeMethod() {
+function createQueryUrl() {
     // create params
     var params = {},
         authTab = '',
@@ -210,8 +216,10 @@ function executeMethod() {
         authTab = $('div#authenticationTabContent').find('div.tab-pane.active').attr('id');
         if( authTab == 'authenticationTabHash') {
             // hash authentication
-            params.user_name = document.pwdHashAuthForm.usr.value;
-            params.password_hash = $.sha1(document.pwdHashAuthForm.usr.value + document.pwdHashAuthForm.pwd.value);
+            if(document.pwdHashAuthForm.usr.value.length > 0) {
+                params.user_name = document.pwdHashAuthForm.usr.value;
+                params.password_hash = $.sha1(document.pwdHashAuthForm.usr.value + document.pwdHashAuthForm.pwd.value);
+            }
         }
         else if( authTab == 'authenticationTabSid' ) {
             // session id authentication
@@ -234,9 +242,40 @@ function executeMethod() {
     // create the query URL
     queryUrl = ODS.createOdsApiUrl(s_currentProcedure.name, webIdAuth);
 
+    return { "url": queryUrl, "params": params };
+}
+
+/**
+ * Updates the query URL shown to the user for informational purposes
+ */
+function updateQueryUrlDisplay() {
+    var queryUrl = createQueryUrl();
+
+    var url = queryUrl.url;
+    var first = true;
+    for(key in queryUrl.params) {
+        if(first) {
+            url += "?";
+            first = false;
+        }
+        else {
+            url += "&";
+        }
+        url += key + "=" + encodeURIComponent(queryUrl.params[key]);
+    }
+
+    $("#queryUrl").html(url);
+}
+
+/**
+ * Executes the ODS method and saves the result into the result div.
+ */
+function executeMethod() {
+    var queryUrl = createQueryUrl();
+
     // perform the query
     showSpinner();
-    $.get(queryUrl, params, function(result) {
+    $.get(queryUrl.url, queryUrl.params, function(result) {
         hideSpinner();
         $('#resultDiv').show();
         $('#resultFancy').text(formatResult(result));
@@ -246,13 +285,13 @@ function executeMethod() {
     // remember used values
     if(s_rememberValues) {
         // we do not want to store the authentication information
-        delete params.user_name;
-        delete params.password_hash;
+        delete queryUrl.params.user_name;
+        delete queryUrl.params.password_hash;
 
         // store the last used values for all methods
         s_rememberedValues = s_rememberedValues || {};
         s_rememberedValues[s_currentProcedure.name] = {};
-        $.each(params, function(key, value) {
+        $.each(queryUrl.params, function(key, value) {
             s_rememberedValues[s_currentProcedure.name][key] = value;
         });
 
@@ -372,4 +411,8 @@ $(document).ready(function() {
        $('#authenticationTab a:first').tab('show');
        loadMethod("user.authenticate");
     });
+
+    // update the query URL whenever the authentication settings change
+    $('.auth').change(updateQueryUrlDisplay);
+    $('#authenticationTab a[data-toggle=tab]').on("shown", updateQueryUrlDisplay);
 });

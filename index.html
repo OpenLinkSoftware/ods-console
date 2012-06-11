@@ -24,16 +24,16 @@
   <link href="css/bootstrap-responsive.css" rel="stylesheet">
   <link type="text/css" href="css/custom-theme/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/main.css">
-  
-  <!-- disabled the boilerplate css since it messes up bootstraps css here and there. 
-       TODO: figure out what we should keep from boilerplate   
+
+  <!-- disabled the boilerplate css since it messes up bootstraps css here and there.
+       TODO: figure out what we should keep from boilerplate
   <link rel="stylesheet" href="css/style.css">-->
-  
+
   <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
-    
+
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
 
   <!-- All JavaScript at the bottom, except this Modernizr build.
@@ -230,13 +230,13 @@
             <div class="control-group">
               <label class="control-label" for="usr">Username:</label>
               <div class="controls">
-                <input type="text" id="usr" name="usr"/>
+                <input class="auth" type="text" id="usr" name="usr"/>
               </div>
             </div>
             <div class="control-group">
               <label class="control-label" for="pwd">Password:</label>
               <div class="controls">
-                <input type="password" id="pwd" name="pwd" />
+                <input class="auth" type="password" id="pwd" name="pwd" />
               </div>
             </div>
           </form>
@@ -248,14 +248,14 @@
             <div class="control-group">
               <label class="control-label" for="sessionId">Session Id:</label>
               <div class="controls">
-                <input class="input-xlarge" type="text" id="sessionId" name="sessionId"/>
+                <input class="input-xlarge auth" type="text" id="sessionId" name="sessionId"/>
               </div>
             </div>
           </form>
         </div>
 
         <div class="tab-pane fade" id="authenticationTabWebId">
-          <p><b>Caution/Fixme: WebID authentication might not work!</b></p>
+          <p><b>Caution/Fixme: WebID authentication only works if the ODS console is also served through a secure connection!</b></p>
           <p>The Server will request a certificate if the selected method requires authentication.</p>
         </div>
       </div>
@@ -263,7 +263,8 @@
 
 
     <!-- initially hidden parameters div -->
-    <div id="apiParamsDiv" class="well" style="display: none">
+    <div id="apiParamsDiv" style="display: none">
+    <div class="well">
       <h3>Parameters</h3>
       <form id="paramsForm" class="form-horizontal">
         <div id="params"></div>
@@ -272,6 +273,13 @@
             type="submit" value="Submit" />
         </div>
       </form>
+    </div>
+
+    <div class="well">
+      <h3>Query URL</h3>
+      <p>This is the query URL used for the configured method call. It is merly provided for reference:</p>
+      <pre id="queryUrl" class="prettyprint" style="background-color:white"></pre>
+    </div>
     </div>
 
     <!-- initially hidden result div -->
