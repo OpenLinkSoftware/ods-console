@@ -307,7 +307,7 @@ $(document).ready(function() {
             // load the requested parameters
             var paramForm = $('#params');
             $.each($.address.parameterNames(), function() {
-                paramForm.find("input#" + this).val($.address.parameter(this));
+                paramForm.find("input#" + this).val(decodeURIComponent($.address.parameter(this)));
             });
         }
     });

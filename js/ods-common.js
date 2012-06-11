@@ -267,7 +267,7 @@ var ODS = (function() {
          *
          * Examples:
          * @code
-         * ODS.setOdsHost("localhost:8890", "localhost::4433");
+         * ODS.setOdsHost("localhost:8890", "localhost:4433");
          * @endcode
          */
         setOdsHost: function(host, sslHost) {
