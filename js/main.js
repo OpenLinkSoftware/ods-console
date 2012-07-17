@@ -191,11 +191,13 @@ function formatResult(result) {
     } catch(err) {}
 
     // try XML
-    parsed = $.parseXML(result);
-    if(parsed) {
-        // format the XML
-        return vkbeautify.xml(result);
-    }
+    try {
+        parsed = $.parseXML(result);
+        if(parsed) {
+            // format the XML
+            return vkbeautify.xml(result);
+        }
+    } catch(err) {}
 
     // fallback
     return result;
