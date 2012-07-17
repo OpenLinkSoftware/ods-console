@@ -299,6 +299,8 @@ function executeMethod() {
 
         // (localStorage does not support objects)
         localStorage.odsValues = JSON.stringify(s_rememberedValues);
+
+        updateQueryUrlDisplay();
     }
 }
 
@@ -350,6 +352,8 @@ $(document).ready(function() {
             $.each($.address.parameterNames(), function() {
                 paramForm.find("input#" + this).val(decodeURIComponent($.address.parameter(this)));
             });
+
+            updateQueryUrlDisplay();
         }
     });
 
