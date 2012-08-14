@@ -81,6 +81,7 @@ function loadMethodModules() {
             modules.push(prefix);
         }
     });
+    modules.sort();
 
     // populate the modules combobox
     var comboBox = $('#apiModuleSelector');
@@ -105,11 +106,16 @@ function loadMethods() {
     comboBox.html('<option name="none">Please select a method</option>');
 
     // populate list
+    var usedProcs = [];
     $.each(s_procedures, function() {
         if(this.name.substr(0, modPrefix.length) == modPrefix) {
-            comboBox.append('<option>' + this.name + '</option>');
+            usedProcs.push(this.name);
         }
     });
+    usedProcs.sort();
+    for(i in usedProcs) {
+        comboBox.append('<option>' + usedProcs[i] + '</option>');
+    }
 }
 
 /**
