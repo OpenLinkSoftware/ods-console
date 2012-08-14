@@ -30,3 +30,42 @@ body {
 .footer {
     text-align:right;
 }
+
+.navbar-inner {
+    background-color:white;
+    background-image:none;
+    color:white;
+}
+
+.navbar {
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px#888;
+    box-shadow: 0 0 5px #888;
+}
+
+#navheader {
+    background-color:white;
+    background-repeat:no-repeat;
+    height:60px;
+}
+
+#header-left {
+    background-image:url(../img/banner.png);
+    background-repeat:no-repeat;
+    height:60px;
+}
+
+#header-right {
+    background-image:url(../img/banner-right.png);
+    background-repeat:no-repeat;
+    background-position:right;
+    height:60px;
+}
+
+header .container {
+    height: 60px;
+    line-height: 60px;
+    font-size: 150%;
+    font-weight: bold;
+    color: #049cdb;
+}
