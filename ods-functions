@@ -773,6 +773,9 @@
 "user.certificates.list": {
 "name": "user.certificates.list", "param": []
 },
+"user.instances.list": {
+"name": "user.instances.list", "param": []
+},
 "user.certificates.get": {
 "name": "user.certificates.get", "param": ["id"]
 },
@@ -784,6 +787,36 @@
 },
 "user.certificates.delete": {
 "name": "user.certificates.delete", "param": ["id"]
+},
+"acl.rule.new": {
+"name": "acl.rule.new", "param": ["subject","subjectType","property","recursive","target","access"]
+},
+"acl.rule.remove": {
+"name": "acl.rule.remove", "param": ["subject","subjectType","property","recursive","target","access"]
+},
+"acl.rule.list": {
+"name": "acl.rule.list", "param": ["subject","subjectType","property","recursive","target","access","details","format"]
+},
+"acl.rule.get": {
+"name": "acl.rule.get", "param": ["iri","format"]
+},
+"acl.group.new": {
+"name": "acl.group.new", "param": ["name","comment","type","member"]
+},
+"acl.group.updateMembers": {
+"name": "acl.group.updateMembers", "param": ["name","addMember","removeMember","overwrite"]
+},
+"acl.group.addCondition": {
+"name": "acl.group.addCondition", "param": ["name","criteria","comparator","value","query"]
+},
+"acl.group.removeCondition": {
+"name": "acl.group.removeCondition", "param": ["name","criteria","comparator","value","query"]
+},
+"acl.group.list": {
+"name": "acl.group.list", "param": ["details","format"]
+},
+"acl.group.get": {
+"name": "acl.group.get", "param": ["name","format"]
 },
 "user.getFOAFData": {
 "name": "user.getFOAFData", "param": ["foafIRI","spongerMode","sslFOAFCheck","outputMode","sslLoginCheck"]
