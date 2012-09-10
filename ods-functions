@@ -497,17 +497,38 @@
 "user.register": {
 "name": "user.register", "param": ["name","password","email","mode","data"]
 },
+"user.oauth.twitter.startAuthentication": {
+"name": "user.oauth.twitter.startAuthentication", "param": ["hostUrl"]
+},
 "twitterServer": {
 "name": "twitterServer", "param": ["hostUrl"]
+},
+"user.oauth.twitter.registrationData": {
+"name": "user.oauth.twitter.registrationData", "param": ["sid","oauth_verifier","oauth_token"]
 },
 "twitterVerify": {
 "name": "twitterVerify", "param": ["sid","oauth_verifier","oauth_token"]
 },
+"user.oauth.linkedin.startAuthentication": {
+"name": "user.oauth.linkedin.startAuthentication", "param": ["hostUrl"]
+},
 "linkedinServer": {
 "name": "linkedinServer", "param": ["hostUrl"]
 },
+"user.oauth.linkedin.registrationData": {
+"name": "user.oauth.linkedin.registrationData", "param": ["sid","oauth_verifier","oauth_token"]
+},
 "linkedinVerify": {
 "name": "linkedinVerify", "param": ["sid","oauth_verifier","oauth_token"]
+},
+"user.openid.startAuthentication": {
+"name": "user.openid.startAuthentication", "param": ["openid","hostUrl","trustroot"]
+},
+"user.openid.registrationData": {
+"name": "user.openid.registrationData", "param": ["url"]
+},
+"user.openid.loginUrl": {
+"name": "user.openid.loginUrl", "param": ["url"]
 },
 "user.authenticate": {
 "name": "user.authenticate", "param": ["user_name","password_hash","facebookUID","openIdUrl","openIdIdentity","oauthMode","oauthSid","oauthVerifier","oauthToken"]
