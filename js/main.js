@@ -324,9 +324,9 @@ $(document).ready(function() {
     }
 
     // load the methods and modules
-    $.get("ods-functions", function(data) {
-        // "data" is a JSON stream of procedures
-        s_procedures = $.parseJSON(data);
+    $.getJSON("ods-functions", function(data) {
+        // "data" is a parsed JSON stream of procedures
+        s_procedures = data;
 
         loadMethodModules();
         loadMethods();
