@@ -803,8 +803,8 @@
 "acl.group.new": {
 "name": "acl.group.new", "param": ["name","comment","type","member"]
 },
-"acl.group.updateMembers": {
-"name": "acl.group.updateMembers", "param": ["name","addMember","removeMember","overwrite"]
+"acl.group.update": {
+"name": "acl.group.update", "param": ["name","newName","newComment","addMember","removeMember","overwrite"]
 },
 "acl.group.addCondition": {
 "name": "acl.group.addCondition", "param": ["name","criteria","comparator","value","query"]
@@ -813,7 +813,7 @@
 "name": "acl.group.removeCondition", "param": ["name","criteria","comparator","value","query"]
 },
 "acl.group.list": {
-"name": "acl.group.list", "param": ["details","format"]
+"name": "acl.group.list", "param": ["type","details","format"]
 },
 "acl.group.get": {
 "name": "acl.group.get", "param": ["name","format"]
