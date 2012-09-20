@@ -497,8 +497,8 @@
 "user.register": {
 "name": "user.register", "param": ["name","password","email","mode","data"]
 },
-"user.oauth.twitter.startAuthentication": {
-"name": "user.oauth.twitter.startAuthentication", "param": ["hostUrl"]
+"user.oauth.twitter.authenticationUrl": {
+"name": "user.oauth.twitter.authenticationUrl", "param": ["hostUrl"]
 },
 "twitterServer": {
 "name": "twitterServer", "param": ["hostUrl"]
@@ -506,11 +506,17 @@
 "user.oauth.twitter.registrationData": {
 "name": "user.oauth.twitter.registrationData", "param": ["sid","oauth_verifier","oauth_token"]
 },
+"user.oauth.facebook.authenticationUrl": {
+"name": "user.oauth.facebook.authenticationUrl", "param": ["hostUrl"]
+},
+"user.oauth.facebook.registrationData": {
+"name": "user.oauth.facebook.registrationData", "param": ["accessToken"]
+},
 "twitterVerify": {
 "name": "twitterVerify", "param": ["sid","oauth_verifier","oauth_token"]
 },
-"user.oauth.linkedin.startAuthentication": {
-"name": "user.oauth.linkedin.startAuthentication", "param": ["hostUrl"]
+"user.oauth.linkedin.authenticationUrl": {
+"name": "user.oauth.linkedin.authenticationUrl", "param": ["hostUrl"]
 },
 "linkedinServer": {
 "name": "linkedinServer", "param": ["hostUrl"]
@@ -521,8 +527,8 @@
 "linkedinVerify": {
 "name": "linkedinVerify", "param": ["sid","oauth_verifier","oauth_token"]
 },
-"user.openid.startAuthentication": {
-"name": "user.openid.startAuthentication", "param": ["openid","hostUrl","trustroot"]
+"user.openid.authenticationUrl": {
+"name": "user.openid.authenticationUrl", "param": ["openid","hostUrl","trustroot"]
 },
 "user.openid.registrationData": {
 "name": "user.openid.registrationData", "param": ["url"]
@@ -811,6 +817,9 @@
 },
 "acl.group.removeCondition": {
 "name": "acl.group.removeCondition", "param": ["name","criteria","comparator","value","query"]
+},
+"acl.group.remove": {
+"name": "acl.group.remove", "param": ["name"]
 },
 "acl.group.list": {
 "name": "acl.group.list", "param": ["type","details","format"]
