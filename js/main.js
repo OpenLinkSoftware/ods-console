@@ -288,7 +288,14 @@ function executeMethod() {
         $('#resultDiv').show();
         $('#resultFancy').text(formatResult(result));
         $('#resultRaw').text(result);
-    }, 'text');
+    }, 'text').error(function(result) {
+      console.log(result);
+        hideSpinner();
+        var msg = "Call failed! [" + result.statusText + "] " + result.responseText;
+        $('#resultDiv').show();
+        $('#resultRaw').text(msg);
+        $('#resultFancy').text(msg);
+    });
 
     // remember used values
     if(s_rememberValues) {
