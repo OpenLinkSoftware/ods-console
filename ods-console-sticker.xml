@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ASCII"?>
+<!DOCTYPE sticker SYSTEM "vad_sticker.dtd">
+<sticker version="1.0" xml:lang="en-UK">
+<caption>
+  <name package="ODS-Console">
+    <prop name="Title" value="ODS Console"/>
+    <prop name="Developer" value="OpenLink Software"/>
+    <prop name="Copyright" value="(C) 2012 OpenLink Software"/>
+    <prop name="Download" value="http://www.openlinksw.com/virtuoso"/>
+  </name>
+  <version package="$VERSION$">
+    <prop name="Release Date" value="$PACKDATE$"/>
+    <prop name="Build" value="Release, optimized"/>
+  </version>
+</caption>
+<dependencies/>
+<procedures uninstallation="supported">
+  <sql purpose="pre-install"></sql>
+  <sql purpose="post-install"></sql>
+</procedures>
+<ddls>
+  <sql purpose="pre-install"></sql>
+  <sql purpose="post-install">
+    <![CDATA[
+      DB.DBA.VHOST_REMOVE (lpath=>'/ods-console');
+      DB.DBA.VHOST_DEFINE (lpath=>'/ods-console', ppath=>'/DAV/VAD/ods-console', vsp_user=>'nobody', is_dav=>1, is_brws=>0, def_page=>'index.html');
+    ]]>
+  </sql>
+  <sql purpose="pre-uninstall">
+    <![CDATA[
+      DB.DBA.VHOST_REMOVE (lpath=>'/ods-console');
+    ]]>
+  </sql>
+</ddls>
+<resources>
+  <file overwrite="yes" type="dav" source="data" source_uri="index.html" target_uri="ods-console/index.html" dav_owner="dav" dav_grp="administrators" dav_perm="110100100NN" makepath="yes"/>
+  <file overwrite="yes" type="dav" source="data" source_uri="ods-functions" target_uri="ods-console/ods-functions" dav_owner="dav" dav_grp="administrators" dav_perm="110100100NN" makepath="yes"/>
+</resources>
+<registry>
+</registry>
+</sticker>
