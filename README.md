@@ -7,6 +7,8 @@
 
 The ODS Console can be installed on any system to access any ODS instance given that the domain of the Console installation has been added to the ODS instance as a client (See also [admin.client.new](http://web.ods.openlinksw.com/odsdox/group__ods__module__admin.html#ga675af873f023acb812a8d7694a1d3b9f)).
 
+The simplest way to install ODS-Console is to [download the ods-console VAD package](http://web.ods.openlinksw.com/~trueg/downloads/ods-console/) and install it via Virtuoso's Conductor. Log into the Condictor with dba privileges and navigate to the System Admin -> Packages page. From there select the downloaded file in the section called "Upload package" and continue with the "Proceed" button. After the successful installation ODS Console will be available at the Virtuoso instance under the path `/ods-console/`.
+
 ODS Console is a pure client-side JS application which can be run from any location including a local folder or [OpenLink's own test installation of ODS Console](http://web.ods.openlinksw.com/ods-console/). By default the console will access the ODS installation on the same domain. However, if the host of the Console installation has been added as a client to the ODS instance (See [`admin.client.new`](http://web.ods.openlinksw.com/odsdox/group__ods__module__admin.html#ga675af873f023acb812a8d7694a1d3b9f) it can be used to access the API of the ODS instance by simply setting the ODS host in the Console configuration:
 
 ![ODS Console Config Dlg](http://web.ods.openlinksw.com/odsdox/ods-console-cfg.png)
