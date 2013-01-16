@@ -4,7 +4,7 @@
 # Path to the vadpacker tool
 VADPACKER=vadpacker.py
 
-VERSION="0.1"
+VERSION="0.2"
 
 # Additional file list
 FILES=`find . -name "*.css" -or -name "*.js" -or -name "*.png" -or -name "*.gif"`

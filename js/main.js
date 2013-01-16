@@ -288,6 +288,7 @@ function executeMethod() {
         $('#resultDiv').show();
         $('#resultFancy').text(formatResult(result));
         $('#resultRaw').text(result);
+        $(document.body).animate({'scrollTop': $('#resultDiv').offset().top }, 1000);
     }, 'text').error(function(result) {
       console.log(result);
         hideSpinner();
@@ -295,6 +296,7 @@ function executeMethod() {
         $('#resultDiv').show();
         $('#resultRaw').text(msg);
         $('#resultFancy').text(msg);
+        $(document.body).animate({'scrollTop': $('#resultDiv').offset().top }, 1000);
     });
 
     // remember used values
