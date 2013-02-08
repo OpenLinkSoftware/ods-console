@@ -2,7 +2,7 @@
 "discussion.groups.get": {
   "name": "discussion.groups.get",
   "param": [
-
+    
   ]
 },
 "discussion.group.get": {
@@ -142,8 +142,8 @@
     "rule"
   ]
 },
-"acl.rules.remove": {
-  "name": "acl.rules.remove",
+"acl.rules.delete": {
+  "name": "acl.rules.delete",
   "param": [
     "resource",
     "rule"
@@ -163,8 +163,8 @@
     "member"
   ]
 },
-"acl.groups.remove": {
-  "name": "acl.groups.remove",
+"acl.groups.delete": {
+  "name": "acl.groups.delete",
   "param": [
     "name",
     "id"
@@ -174,6 +174,7 @@
   "name": "acl.groups.update",
   "param": [
     "name",
+    "id",
     "newName",
     "newDescription",
     "addMember",
@@ -184,13 +185,14 @@
 "acl.groups.list": {
   "name": "acl.groups.list",
   "param": [
-
+    
   ]
 },
 "acl.groups.get": {
   "name": "acl.groups.get",
   "param": [
-    "name"
+    "name",
+    "id"
   ]
 },
 "qrcode": {
@@ -249,7 +251,7 @@
 "getDefaultHttps": {
   "name": "getDefaultHttps",
   "param": [
-
+    
   ]
 },
 "server.getInfo": {
@@ -294,7 +296,8 @@
     "callback",
     "action",
     "confirm",
-    "data"
+    "data",
+    "client_ip"
   ]
 },
 "user.authenticate.browserid": {
@@ -413,13 +416,13 @@
 "user.validate": {
   "name": "user.validate",
   "param": [
-
+    
   ]
 },
 "user.logout": {
   "name": "user.logout",
   "param": [
-
+    
   ]
 },
 "user.update": {
@@ -514,7 +517,7 @@
 "user.acl.info": {
   "name": "user.acl.info",
   "param": [
-
+    
   ]
 },
 "user.acl.update": {
@@ -533,7 +536,7 @@
 "user.upload": {
   "name": "user.upload",
   "param": [
-
+    
   ]
 },
 "user.delete": {
@@ -577,7 +580,7 @@
 "user.certificateUrl": {
   "name": "user.certificateUrl",
   "param": [
-
+    
   ]
 },
 "user.search": {
@@ -617,13 +620,13 @@
 "user.invitation.list": {
   "name": "user.invitation.list",
   "param": [
-
+    
   ]
 },
 "user.invitations.get": {
   "name": "user.invitations.get",
   "param": [
-
+    
   ]
 },
 "user.relation.delete": {
@@ -745,7 +748,8 @@
     "url",
     "uri",
     "access",
-    "type"
+    "type",
+    "oauth_sid"
   ]
 },
 "user.onlineAccounts.delete": {
@@ -755,14 +759,13 @@
     "name",
     "url",
     "uri",
-    "access",
     "type"
   ]
 },
 "user.bioEvents.list": {
   "name": "user.bioEvents.list",
   "param": [
-
+    
   ]
 },
 "user.bioEvents.new": {
@@ -785,7 +788,7 @@
 "user.favorites.list": {
   "name": "user.favorites.list",
   "param": [
-
+    
   ]
 },
 "user.favorites.get": {
@@ -822,7 +825,7 @@
 "user.mades.list": {
   "name": "user.mades.list",
   "param": [
-
+    
   ]
 },
 "user.mades.get": {
@@ -896,7 +899,7 @@
 "user.seeks.list": {
   "name": "user.seeks.list",
   "param": [
-
+    
   ]
 },
 "user.seeks.get": {
@@ -974,7 +977,7 @@
 "user.likes.list": {
   "name": "user.likes.list",
   "param": [
-
+    
   ]
 },
 "user.likes.get": {
@@ -1015,7 +1018,7 @@
 "user.knows.list": {
   "name": "user.knows.list",
   "param": [
-
+    
   ]
 },
 "user.knows.get": {
@@ -1050,13 +1053,13 @@
 "user.certificates.list": {
   "name": "user.certificates.list",
   "param": [
-
+    
   ]
 },
 "user.instances.list": {
   "name": "user.instances.list",
   "param": [
-
+    
   ]
 },
 "user.certificates.get": {
@@ -1179,7 +1182,7 @@
 "notification.services": {
   "name": "notification.services",
   "param": [
-
+    
   ]
 },
 "instance.notification.set": {
@@ -1235,7 +1238,7 @@
 "filtersData": {
   "name": "filtersData",
   "param": [
-
+    
   ]
 },
 "site.search": {
@@ -1248,7 +1251,7 @@
 "error_handler": {
   "name": "error_handler",
   "param": [
-
+    
   ]
 },
 "admin.clients.new": {
@@ -1275,13 +1278,32 @@
 "admin.apikeys.list": {
   "name": "admin.apikeys.list",
   "param": [
-
+    
+  ]
+},
+"admin.oauth.odshosts.new": {
+  "name": "admin.oauth.odshosts.new",
+  "param": [
+    "name",
+    "host"
+  ]
+},
+"admin.oauth.odshosts.delete": {
+  "name": "admin.oauth.odshosts.delete",
+  "param": [
+    "name"
+  ]
+},
+"admin.oauth.odshosts.list": {
+  "name": "admin.oauth.odshosts.list",
+  "param": [
+    
   ]
 },
 "salmon_endpoint": {
   "name": "salmon_endpoint",
   "param": [
-
+    
   ]
 },
 "oauth_allowed": {
