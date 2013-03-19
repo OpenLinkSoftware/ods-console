@@ -23,7 +23,7 @@
   <sql purpose="post-install">
     <![CDATA[
       DB.DBA.VHOST_REMOVE (lpath=>'/ods-console');
-      DB.DBA.VHOST_DEFINE (lpath=>'/ods-console', ppath=>'/DAV/VAD/ods-console', vsp_user=>'nobody', is_dav=>1, is_brws=>0, def_page=>'index.html');
+      DB.DBA.VHOST_DEFINE (lpath=>'/ods-console', ppath=>'/DAV/VAD/ods-console', vsp_user=>'dba', is_dav=>1, is_brws=>0, def_page=>'index.html');
     ]]>
   </sql>
   <sql purpose="pre-uninstall">
@@ -33,8 +33,8 @@
   </sql>
 </ddls>
 <resources>
-  <file overwrite="yes" type="dav" source="data" source_uri="index.html" target_uri="ods-console/index.html" dav_owner="dav" dav_grp="administrators" dav_perm="110100100NN" makepath="yes"/>
-  <file overwrite="yes" type="dav" source="data" source_uri="ods-functions" target_uri="ods-console/ods-functions" dav_owner="dav" dav_grp="administrators" dav_perm="110100100NN" makepath="yes"/>
+  <file source_uri="index.html" target_uri="ods-console/" />
+  <file source_uri="ods-functions.vsp" target_uri="ods-console/" />
 </resources>
 <registry>
 </registry>

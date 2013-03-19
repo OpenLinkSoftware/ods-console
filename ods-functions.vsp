@@ -1,0 +1,39 @@
+<?vsp
+  declare cols any;
+  declare first, i, l int;
+  declare pname varchar;
+
+  -- We build a JSON document here
+  http_header ('Content-type: application/json\r\n');
+
+  -- It is one big object
+  http ('{');
+
+  -- Get all procedure names to which ODS_API has execute rights
+  first := 1;
+  for (select P_NAME from SYS_GRANTS, SYS_PROCEDURES where P_NAME=G_OBJECT and G_USER=114 and G_OP=32 and P_NAME like 'ODS.ODS_API.%') do
+  {
+    -- strip away the ns and user prefix
+    pname := substring (P_NAME, 13, 200);
+
+    if (first = 0)
+      http (',');
+
+    http (sprintf ('"%s": { "name": "%s", "param": [ ', pname, pname));
+    cols := procedure_cols (P_NAME);
+    first := 1;
+    for (i := 0, l := length (cols); i < l; i := i + 1)
+    {
+      if (first = 0)
+        http (',');
+      http (sprintf ('"%s"', cols[i][3]));
+      first := 0;
+    }
+
+    http ('] }');
+
+    first := 0;
+  }
+
+  http ('}');
+?>
