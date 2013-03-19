@@ -30,11 +30,9 @@ function hideSpinner() {
  */
 function loadConfig() {
     // load session config
-    ODS.setOdsHost(localStorage.odsHost);
     s_rememberValues = (localStorage.rememberValues == "yes");
 
     // update cfg dialog
-    $('input#cfgHost').val(ODS.getOdsHost());
     $('input#cfgRememberValues').attr('checked', s_rememberValues ? "checked" : undefined);
 }
 
@@ -44,13 +42,10 @@ function loadConfig() {
  */
 function saveConfig() {
     // update the session config
-    console.log("Saving host " + $('input#cfgHost').val());
-    ODS.setOdsHost($('input#cfgHost').val());
     s_rememberValues = ($('input#cfgRememberValues').attr('checked') == "checked");
     console.log("Saving remember values: " + s_rememberValues);
 
     // update the persistent config
-    localStorage.odsHost = ODS.getOdsHost();
     localStorage.rememberValues = s_rememberValues ? "yes" : null;
 }
 
