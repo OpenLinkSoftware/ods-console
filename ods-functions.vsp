@@ -11,7 +11,7 @@
 
   -- Get all procedure names to which ODS_API has execute rights
   first := 1;
-  for (select P_NAME from SYS_GRANTS, SYS_PROCEDURES where P_NAME=G_OBJECT and G_USER=114 and G_OP=32 and P_NAME like 'ODS.ODS_API.%') do
+  for (select P_NAME from SYS_GRANTS, SYS_PROCEDURES, SYS_USERS where P_NAME=G_OBJECT and G_USER=U_ID and G_OP=32 and P_NAME like 'ODS.ODS_API.%' and U_NAME='ODS_API') do
   {
     -- strip away the ns and user prefix
     pname := substring (P_NAME, 13, 200);
