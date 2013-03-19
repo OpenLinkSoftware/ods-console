@@ -333,7 +333,7 @@ $(document).ready(function() {
     }
 
     // load the methods and modules
-    $.getJSON("ods-functions", function(data) {
+    $.getJSON("ods-functions.vsp", function(data) {
         // "data" is a parsed JSON stream of procedures
         s_procedures = data;
 
