@@ -1,0 +1,3 @@
+0.3
+  * Dynamic procedure list constructed via a vsp page.
+  * Removed the configuration option to set the ODS host. It does break the dynamic procedure list.
