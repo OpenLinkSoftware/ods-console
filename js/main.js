@@ -137,6 +137,26 @@ function loadMethod(methodName, ignorePrevValues) {
 }
 
 /**
+ * Adds an additional input field to a parameter for multiple value input.
+ */
+function addParameterInputField(name) {
+    // get the add button to insert before
+    var $this = $('.parameter[id="' + name + '"]').parent().children().last();
+
+    // detemine the number of inputs we already have
+    var cnt = $this.parent().children().length-1;
+
+    // append an index to the name
+    name += "[" + cnt + "]";
+
+    // add a new input between the button and the last input
+    $this.before('<input style="margin-top:5px;" class="parameter input-xxlarge" id="' + name + '" type="text" /> ');
+
+    // update the query URL whenever a parameter changes (for the new input)
+    $this.prev().change(updateQueryUrlDisplay);
+}
+
+/**
  * Loads the form which contains fields for all method parameters.
  */
 function loadMethodForm(methodName, ignorePrevValues) {
@@ -151,7 +171,7 @@ function loadMethodForm(methodName, ignorePrevValues) {
     $.each(s_currentProcedure.param, function() {
         var s = '<div class="control-group">';
         s += '<label class="control-label" for="' + this + '">' + this + ':</label>';
-        s += '<div class="controls"><input class="parameter input-xxlarge" id="' + this + '" type="text" /></div>';
+        s += '<div class="controls"><input class="parameter input-xxlarge" id="' + this + '" type="text" /> <a class="parameter_append" title="Add additional values for ' + this + '" href="#"><i class="icon-plus"></i></a></div>';
         s += "</div>";
         paramForm.append(s);
     });
@@ -159,7 +179,20 @@ function loadMethodForm(methodName, ignorePrevValues) {
     if(ignorePrevValues != true && s_rememberValues && s_rememberedValues) {
         if(s_rememberedValues.hasOwnProperty(s_currentProcedure.name)) {
             $.each(s_rememberedValues[s_currentProcedure.name], function(key, value) {
-                paramForm.find("input#" + key).val(value);
+                // previously we stored values as strings, now we use a list of strings
+                if(typeof(value) === 'string') {
+                    paramForm.find("input#" + key).val(value);
+                }
+
+                // Each value is a list of strings
+                else {
+                    for(var i = 0; i < value.length; i++) {
+                        // if we have more than one value for a parameter we need to append input fields
+                        if(i > 0) addParameterInputField(key);
+                        // find the last input for the parameter
+                        paramForm.find("input#" + key).parent().children('input.parameter').last().val(value[i]);
+                    }
+                }
             });
         }
     }
@@ -172,6 +205,19 @@ function loadMethodForm(methodName, ignorePrevValues) {
 
     // update the query URL whenever a parameter changes
     $('.parameter').change(updateQueryUrlDisplay);
+
+    // append more values for a parameter
+    $('.parameter_append').click(function(event) {
+      event.preventDefault();
+
+      var $this = $(this);
+
+      // detemine the id of the parameter
+      var name = $this.parent().children().first().attr('id');
+
+      // append the input
+      addParameterInputField(name);
+    });
 
     // update the query URL display
     updateQueryUrlDisplay();
@@ -237,8 +283,17 @@ function createQueryUrl() {
     // 2. the actual params
     $('form#paramsForm').find('input.parameter').each(function() {
         var val = this.value;
+
+        // extract name by stripping away the [N] suffix used for multiple occurences of the same parameter
+        var name = this.id;
+        if(name.indexOf('[') > 0)
+          name = name.substring(0, this.id.indexOf('['));
+
         if(val != null && val.length > 0) {
-            params[this.id] = val;
+            if(params[name])
+                params[name].push(val);
+            else
+                params[name] = [].concat(val);
         }
     });
 
@@ -253,21 +308,7 @@ function createQueryUrl() {
  */
 function updateQueryUrlDisplay() {
     var queryUrl = createQueryUrl();
-
-    var url = queryUrl.url;
-    var first = true;
-    for(key in queryUrl.params) {
-        if(first) {
-            url += "?";
-            first = false;
-        }
-        else {
-            url += "&";
-        }
-        url += key + "=" + encodeURIComponent(queryUrl.params[key]);
-    }
-
-    $("#queryUrl").html(url);
+    $("#queryUrl").html(queryUrl.url + '?' + $.param(queryUrl.params));
 }
 
 /**
@@ -299,13 +340,12 @@ function executeMethod() {
         // we do not want to store the authentication information
         delete queryUrl.params.user_name;
         delete queryUrl.params.password_hash;
+        delete queryUrl.params.sid;
+        delete queryUrl.params.realm;
 
         // store the last used values for all methods
         s_rememberedValues = s_rememberedValues || {};
-        s_rememberedValues[s_currentProcedure.name] = {};
-        $.each(queryUrl.params, function(key, value) {
-            s_rememberedValues[s_currentProcedure.name][key] = value;
-        });
+        s_rememberedValues[s_currentProcedure.name] = queryUrl.params;
 
         // (localStorage does not support objects)
         localStorage.odsValues = JSON.stringify(s_rememberedValues);
@@ -319,6 +359,9 @@ function executeMethod() {
  */
 $(document).ready(function() {
     console.log("Ready");
+
+    // Use traditional multi-value parameters in jQuery ajax calls, ie. do not include the []
+    jQuery.ajaxSettings.traditional = true;
 
     loadConfig();
 
