@@ -179,7 +179,20 @@ function loadMethodForm(methodName, ignorePrevValues) {
     if(ignorePrevValues != true && s_rememberValues && s_rememberedValues) {
         if(s_rememberedValues.hasOwnProperty(s_currentProcedure.name)) {
             $.each(s_rememberedValues[s_currentProcedure.name], function(key, value) {
-                paramForm.find("input#" + key).val(value);
+                // previously we stored values as strings, now we use a list of strings
+                if(typeof(value) === 'string') {
+                    paramForm.find("input#" + key).val(value);
+                }
+
+                // Each value is a list of strings
+                else {
+                    for(var i = 0; i < value.length; i++) {
+                        // if we have more than one value for a parameter we need to append input fields
+                        if(i > 0) addParameterInputField(key);
+                        // find the last input for the parameter
+                        paramForm.find("input#" + key).parent().children('input.parameter').last().val(value[i]);
+                    }
+                }
             });
         }
     }
@@ -327,13 +340,12 @@ function executeMethod() {
         // we do not want to store the authentication information
         delete queryUrl.params.user_name;
         delete queryUrl.params.password_hash;
+        delete queryUrl.params.sid;
+        delete queryUrl.params.realm;
 
         // store the last used values for all methods
         s_rememberedValues = s_rememberedValues || {};
-        s_rememberedValues[s_currentProcedure.name] = {};
-        $.each(queryUrl.params, function(key, value) {
-            s_rememberedValues[s_currentProcedure.name][key] = value;
-        });
+        s_rememberedValues[s_currentProcedure.name] = queryUrl.params;
 
         // (localStorage does not support objects)
         localStorage.odsValues = JSON.stringify(s_rememberedValues);
