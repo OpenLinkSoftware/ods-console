@@ -253,21 +253,7 @@ function createQueryUrl() {
  */
 function updateQueryUrlDisplay() {
     var queryUrl = createQueryUrl();
-
-    var url = queryUrl.url;
-    var first = true;
-    for(key in queryUrl.params) {
-        if(first) {
-            url += "?";
-            first = false;
-        }
-        else {
-            url += "&";
-        }
-        url += key + "=" + encodeURIComponent(queryUrl.params[key]);
-    }
-
-    $("#queryUrl").html(url);
+    $("#queryUrl").html(queryUrl.url + '?' + $.param(queryUrl.params));
 }
 
 /**
