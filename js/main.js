@@ -151,7 +151,7 @@ function loadMethodForm(methodName, ignorePrevValues) {
     $.each(s_currentProcedure.param, function() {
         var s = '<div class="control-group">';
         s += '<label class="control-label" for="' + this + '">' + this + ':</label>';
-        s += '<div class="controls"><input class="parameter input-xxlarge" id="' + this + '" type="text" /></div>';
+        s += '<div class="controls"><input class="parameter input-xxlarge" id="' + this + '" type="text" /> <a class="parameter_append" title="Add additional values for ' + this + '" href="#"><i class="icon-plus"></i></a></div>';
         s += "</div>";
         paramForm.append(s);
     });
@@ -172,6 +172,28 @@ function loadMethodForm(methodName, ignorePrevValues) {
 
     // update the query URL whenever a parameter changes
     $('.parameter').change(updateQueryUrlDisplay);
+
+    // append more values for a parameter
+    $('.parameter_append').click(function(event) {
+      event.preventDefault();
+
+      var $this = $(this);
+
+      // detemine the id of the parameter
+      var name = $this.parent().children().first().attr('id');
+
+      // detemine the number of inputs we already have
+      var cnt = $this.parent().children().length-1;
+
+      // append an index to the name
+      name += "[" + cnt + "]";
+
+      // add a new input between the button and the last input
+      $this.before('<input style="margin-top:5px;" class="parameter input-xxlarge" id="' + name + '" type="text" /> ');
+
+      // update the query URL whenever a parameter changes (for the new input)
+      $this.prev().change(updateQueryUrlDisplay);
+    });
 
     // update the query URL display
     updateQueryUrlDisplay();
@@ -237,8 +259,17 @@ function createQueryUrl() {
     // 2. the actual params
     $('form#paramsForm').find('input.parameter').each(function() {
         var val = this.value;
+
+        // extract name by stripping away the [N] suffix used for multiple occurences of the same parameter
+        var name = this.id;
+        if(name.indexOf('[') > 0)
+          name = name.substring(0, this.id.indexOf('['));
+
         if(val != null && val.length > 0) {
-            params[this.id] = val;
+            if(params[name])
+                params[name].push(val);
+            else
+                params[name] = [].concat(val);
         }
     });
 
@@ -305,6 +336,9 @@ function executeMethod() {
  */
 $(document).ready(function() {
     console.log("Ready");
+
+    // Use traditional multi-value parameters in jQuery ajax calls, ie. do not include the []
+    jQuery.ajaxSettings.traditional = true;
 
     loadConfig();
 
