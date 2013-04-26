@@ -137,6 +137,26 @@ function loadMethod(methodName, ignorePrevValues) {
 }
 
 /**
+ * Adds an additional input field to a parameter for multiple value input.
+ */
+function addParameterInputField(name) {
+    // get the add button to insert before
+    var $this = $('.parameter[id="' + name + '"]').parent().children().last();
+
+    // detemine the number of inputs we already have
+    var cnt = $this.parent().children().length-1;
+
+    // append an index to the name
+    name += "[" + cnt + "]";
+
+    // add a new input between the button and the last input
+    $this.before('<input style="margin-top:5px;" class="parameter input-xxlarge" id="' + name + '" type="text" /> ');
+
+    // update the query URL whenever a parameter changes (for the new input)
+    $this.prev().change(updateQueryUrlDisplay);
+}
+
+/**
  * Loads the form which contains fields for all method parameters.
  */
 function loadMethodForm(methodName, ignorePrevValues) {
@@ -182,17 +202,8 @@ function loadMethodForm(methodName, ignorePrevValues) {
       // detemine the id of the parameter
       var name = $this.parent().children().first().attr('id');
 
-      // detemine the number of inputs we already have
-      var cnt = $this.parent().children().length-1;
-
-      // append an index to the name
-      name += "[" + cnt + "]";
-
-      // add a new input between the button and the last input
-      $this.before('<input style="margin-top:5px;" class="parameter input-xxlarge" id="' + name + '" type="text" /> ');
-
-      // update the query URL whenever a parameter changes (for the new input)
-      $this.prev().change(updateQueryUrlDisplay);
+      // append the input
+      addParameterInputField(name);
     });
 
     // update the query URL display
