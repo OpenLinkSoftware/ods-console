@@ -1,3 +1,7 @@
+0.4.1
+  * Added a permalink button to the page.
+  * Small css modifications to make the panels smaller.
+
 0.4
   * Allow the addition of multiple value inputs for each parameter. This allows to perform requests
     which allow or require lists like acl.groups.new.
