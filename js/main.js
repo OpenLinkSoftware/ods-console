@@ -154,6 +154,7 @@ function addParameterInputField(name) {
 
     // update the query URL whenever a parameter changes (for the new input)
     $this.prev().change(updateQueryUrlDisplay);
+    $this.prev().change(updatePermaLink);
 }
 
 /**
@@ -205,6 +206,7 @@ function loadMethodForm(methodName, ignorePrevValues) {
 
     // update the query URL whenever a parameter changes
     $('.parameter').change(updateQueryUrlDisplay);
+    $('.parameter').change(updatePermaLink);
 
     // append more values for a parameter
     $('.parameter_append').click(function(event) {
@@ -221,6 +223,7 @@ function loadMethodForm(methodName, ignorePrevValues) {
 
     // update the query URL display
     updateQueryUrlDisplay();
+    updatePermaLink();
 }
 
 
@@ -355,6 +358,44 @@ function executeMethod() {
 }
 
 /**
+ * Creates a permalink for the currently selected method and parameter values, excluding authentication.
+ */
+function createPermaLink() {
+  // url without hash or query
+  var url = window.location.href.split("?")[0].split("#")[0];
+
+  // add the selected method if there is any
+  var $apiMethodSelector = $('#apiMethodSelector');
+  if($apiMethodSelector.val() != 'none') {
+    url += '#?method=';
+    url += encodeURIComponent($apiMethodSelector.val());
+
+    // add the parameter values
+    $('form#paramsForm').find('input.parameter').each(function() {
+        var val = this.value;
+
+        // extract name by stripping away the [N] suffix used for multiple occurences of the same parameter
+        var name = this.id;
+        if(name.indexOf('[') > 0)
+          name = name.substring(0, this.id.indexOf('['));
+
+        if(val != null && val.length > 0) {
+          url += '&' + name + '=' + encodeURIComponent(val);
+        }
+    });
+  }
+
+  return url;
+}
+
+/**
+ * Updates the permalink on the corresponding a element.
+ */
+function updatePermaLink() {
+  $('#buttonPermaLink').attr('href', createPermaLink());
+}
+
+/**
  * Register methods to actions, events, and so on.
  */
 $(document).ready(function() {
@@ -407,6 +448,7 @@ $(document).ready(function() {
             });
 
             updateQueryUrlDisplay();
+            updatePermaLink();
         }
     });
 
